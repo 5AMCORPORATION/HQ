@@ -100,7 +100,7 @@
         .tag-left { top: 40px; left: 40px; transform: rotate(-90deg) translateX(-100%); transform-origin: top left; }
         .tag-right { bottom: 40px; right: 40px; transform: rotate(90deg) translateX(100%); transform-origin: bottom right; }
 
-        /* --- HERO PORTADA CELESTIAL Y TOTALMENTE CENTRADA --- */
+        /* --- HERO PORTADA CELESTIAL --- */
         .hero-viewport {
             height: 100vh;
             display: flex;
@@ -211,10 +211,91 @@
             letter-spacing: 0.25em;
         }
 
-        /* --- REJILLA (APPLE ECOSYSTEM LOOK) --- */
-        .ecosystem-grid {
+        /* --- CONTENEDOR MAESTRO DE BLOQUES VERTICALES --- */
+        .divisions-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        /* Bloque Unificado de Enterprises */
+        .enterprise-block {
+            width: 100%;
+        }
+
+        .block-title-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 30px;
+            padding-left: 10px;
+        }
+
+        /* --- NUEVO GRID INTERNO PARA OPCIÓN A (TARJETAS DELGADAS) --- */
+        .enterprise-compact-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        /* Tarjeta Estilo Opción A (Más delgadas/esbeltas) */
+        .compact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 35px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 220px;
+            text-decoration: none;
+            color: var(--text-primary);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.03);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s, box-shadow 0.5s;
+        }
+
+        .compact-card:hover {
+            transform: translate3d(0, -6px, 0);
+            border-color: var(--border-active);
+            box-shadow: 0 40px 70px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255,255,255,0.08);
+        }
+
+        .compact-card-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        .compact-card-title i {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            transition: var(--transition-fluid);
+        }
+
+        .compact-card:hover .compact-card-title i {
+            color: #ffffff;
+            transform: translate(3px, -3px);
+        }
+
+        .compact-card-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* --- REJILLA PARA TARJETAS GRANDES RESTANTES --- */
+        .standard-ecosystem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 40px;
         }
 
@@ -222,13 +303,13 @@
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
             border-radius: 24px;
-            padding: 50px 24px;
+            padding: 50px 30px;
             display: flex;
             flex-direction: column;
             align-items: center; 
             text-align: center; 
             justify-content: flex-start;
-            min-height: 620px;
+            min-height: 480px;
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(30px);
@@ -294,120 +375,6 @@
             color: var(--text-secondary);
             font-weight: 500;
             margin-top: 6px;
-        }
-
-        /* --- ARQUITECTURA DEL CARRUSEL PREMIUM (SNEAK-PEEK LOOK) --- */
-        .carousel-viewport-wrapper {
-            position: relative;
-            width: 100%;
-            margin-top: 15px;
-        }
-
-        /* Degradados laterales de desvanecimiento estilo Apple Store */
-        .carousel-viewport-wrapper::before,
-        .carousel-viewport-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 0; bottom: 0; width: 25px;
-            z-index: 5;
-            pointer-events: none;
-            transition: var(--transition-fluid);
-        }
-        .carousel-viewport-wrapper::before {
-            left: -2px;
-            background: linear-gradient(90deg, #090a0d 0%, transparent 100%);
-        }
-        .carousel-viewport-wrapper::after {
-            right: -2px;
-            background: linear-gradient(-90deg, #090a0d 0%, transparent 100%);
-        }
-
-        .carousel-track {
-            display: flex;
-            gap: 16px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none; /* Ocultar barra Firefox */
-            padding: 15px 5px;
-            width: 100%;
-        }
-
-        .carousel-track::-webkit-scrollbar {
-            display: none; /* Ocultar barra Chrome/Safari */
-        }
-
-        /* Contenedor Individual de la App dentro del Carrusel */
-        .menu-btn {
-            flex: 0 0 88%; /* Muestra casi toda la tarjeta y asoma la siguiente */
-            scroll-snap-align: center;
-            background: linear-gradient(145deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.03) 100%);
-            border: 1px solid var(--border-glass);
-            border-radius: 20px;
-            padding: 24px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            text-decoration: none;
-            color: var(--text-primary);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .menu-btn:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-4px);
-            box-shadow: 0 25px 45px rgba(0,0,0,0.6), 0 0 30px rgba(255,255,255,0.03);
-        }
-
-        .menu-btn-title {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .menu-btn-title i {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            transition: var(--transition-fluid);
-        }
-
-        .menu-btn:hover .menu-btn-title i {
-            color: #ffffff;
-            transform: translate(2px, -2px);
-        }
-
-        .menu-btn-desc {
-            font-size: 0.78rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            font-weight: 400;
-        }
-
-        /* Controles Visuales inferiores del Carrusel */
-        .carousel-nav-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            margin-top: 18px;
-        }
-
-        .indicator-dot {
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.15);
-            transition: var(--transition-fluid);
-        }
-
-        .indicator-dot.active {
-            background: #ffffff;
-            width: 18px;
-            border-radius: 4px;
         }
 
         /* --- CENSURA ESTILO APPLE SCREEN --- */
@@ -493,17 +460,17 @@
             text-transform: uppercase;
         }
 
-        /* --- MEDIA QUERIES --- */
-        @media (max-width: 1200px) {
-            .ecosystem-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        /* --- MEDIA QUERIES (ADAPTACIÓN MÓVIL EXACTA) --- */
+        @media (max-width: 1024px) {
+            .enterprise-compact-grid { grid-template-columns: 1fr; gap: 20px; }
+            .standard-ecosystem-grid { grid-template-columns: 1fr; gap: 30px; }
         }
 
         @media (max-width: 840px) {
-            .ecosystem-grid { grid-template-columns: 1fr; gap: 30px; }
-            .ecosystem-card { min-height: auto; padding: 45px 20px; border-radius: 24px; }
             .ecosystem-container { padding: 60px 20px; }
+            .ecosystem-card { min-height: auto; padding: 45px 20px; border-radius: 24px; }
             .matrix-data-tag { display: none; } 
-            .menu-btn { flex: 0 0 85%; }
+            .divisions-wrapper { gap: 45px; }
         }
     </style>
 </head>
@@ -535,106 +502,102 @@
             <h2>Nuestras Divisiones</h2>
         </div>
 
-        <div class="ecosystem-grid">
+        <div class="divisions-wrapper">
             
-            <div class="ecosystem-card">
-                <div class="card-top-wrapper">
-                    <div class="card-brand-meta">
-                        <div class="brand-avatar">
-                            <i class="fa-solid fa-layer-group"></i>
+            <section class="enterprise-block">
+                <div class="block-title-meta">
+                    <div class="brand-avatar" style="width: 48px; height: 48px; border-radius: 12px;">
+                        <i class="fa-solid fa-layer-group" style="font-size: 1rem;"></i>
+                    </div>
+                    <div>
+                        <div class="brand-title" style="font-size: 1.4rem;">5am Enterprises</div>
+                        <div class="brand-subtitle" style="margin-top: 2px;">Media & Asset Matrix // Portafolio de Medios</div>
+                    </div>
+                </div>
+
+                <div class="enterprise-compact-grid">
+                    
+                    <a href="#" target="_blank" class="compact-card">
+                        <div class="compact-card-title">
+                            Anuncios <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </div>
-                        <div>
-                            <div class="brand-title">5am Enterprises</div>
-                            <div class="brand-subtitle">Media & Asset Matrix</div>
+                        <div class="compact-card-desc">Aquí hacemos publicidad a negocios digitales de alto alcance.</div>
+                    </a>
+
+                    <a href="#" target="_blank" class="compact-card">
+                        <div class="compact-card-title">
+                            Seguidores <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </div>
-                    </div>
+                        <div class="compact-card-desc">Aquí hacemos venta de seguidores certificados para cualquier red social.</div>
+                    </a>
 
-                    <div class="card-manifesto">
-                        <h3>Portafolio de Medios</h3>
-                    </div>
-
-                    <div class="carousel-viewport-wrapper">
-                        <div class="carousel-track" id="enterpriseTrack">
-                            
-                            <a href="#" target="_blank" class="menu-btn">
-                                <div class="menu-btn-title">Anuncios <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-                                <div class="menu-btn-desc">Aquí hacemos publicidad a negocios digitales de alto alcance.</div>
-                            </a>
-
-                            <a href="#" target="_blank" class="menu-btn">
-                                <div class="menu-btn-title">Seguidores <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-                                <div class="menu-btn-desc">Aquí hacemos venta de seguidores certificados para cualquier red social.</div>
-                            </a>
-
-                            <a href="#" target="_blank" class="menu-btn">
-                                <div class="menu-btn-title">Páginas Web <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-                                <div class="menu-btn-desc">Aquí hacemos páginas web premium para negocios que vendan por Instagram o WhatsApp.</div>
-                            </a>
-
-                            <a href="#" target="_blank" class="menu-btn">
-                                <div class="menu-btn-title">Motivacional <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-                                <div class="menu-btn-desc">Páginas de TikTok e Instagram donde se comparte contenido audiovisual de alto nivel.</div>
-                            </a>
-
+                    <a href="#" target="_blank" class="compact-card">
+                        <div class="compact-card-title">
+                            Páginas Web <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </div>
-                    </div>
+                        <div class="compact-card-desc">Aquí hacemos páginas web premium para negocios que vendan por Instagram o WhatsApp.</div>
+                    </a>
 
-                    <div class="carousel-nav-indicators">
-                        <div class="indicator-dot active"></div>
-                        <div class="indicator-dot"></div>
-                        <div class="indicator-dot"></div>
-                        <div class="indicator-dot"></div>
-                    </div>
+                    <a href="#" target="_blank" class="compact-card">
+                        <div class="compact-card-title">
+                            Motivacional <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </div>
+                        <div class="compact-card-desc">Páginas de TikTok e Instagram donde se comparte contenido audiovisual de alto nivel.</div>
+                    </a>
 
                 </div>
-            </div>
+            </section>
 
-            <div class="ecosystem-card card-restricted">
-                <div class="card-top-wrapper">
-                    <div class="card-brand-meta">
-                        <div class="brand-avatar">
-                            <i class="fa-solid fa-lock"></i>
-                        </div>
-                        <div>
-                            <div class="brand-title">
-                                <span class="censored-text">5am Tech</span>
+            <div class="standard-ecosystem-grid">
+                
+                <div class="ecosystem-card card-restricted">
+                    <div class="card-top-wrapper">
+                        <div class="card-brand-meta">
+                            <div class="brand-avatar">
+                                <i class="fa-solid fa-lock"></i>
                             </div>
-                            <div class="brand-subtitle">Software Engineering</div>
-                        </div>
-                    </div>
-
-                    <div class="card-manifesto">
-                        <h3>Ecosistema Móvil Propietario</h3>
-                        <p>Desarrollo estratégico de software cerrado y soluciones tecnológicas orientadas al alto rendimiento. El acceso público a la landing se encuentra suspendido de manera temporal.</p>
-                    </div>
-                </div>
-                <div class="card-link-trigger" style="opacity: 0.4;">
-                    Acceso Restringido <i class="fa-solid fa-lock" style="font-size: 0.6rem;"></i>
-                </div>
-            </div>
-
-            <div class="ecosystem-card card-restricted">
-                <div class="card-top-wrapper">
-                    <div class="card-brand-meta">
-                        <div class="brand-avatar">
-                            <i class="fa-solid fa-lock"></i>
-                        </div>
-                        <div>
-                            <div class="brand-title">
-                                <span class="censored-text">Store GH</span>
+                            <div>
+                                <div class="brand-title">
+                                    <span class="censored-text">5am Tech</span>
+                                </div>
+                                <div class="brand-subtitle">Software Engineering</div>
                             </div>
-                            <div class="brand-subtitle">Premium Retail & Apparel</div>
+                        </div>
+
+                        <div class="card-manifesto">
+                            <h3>Ecosistema Móvil Propietario</h3>
+                            <p>Desarrollo estratégico de software cerrado y soluciones tecnológicas orientadas al alto rendimiento. El acceso público a la landing se encuentra suspendido de manera temporal.</p>
                         </div>
                     </div>
-
-                    <div class="card-manifesto">
-                        <h3>Indumentaria Urbana de Lujo</h3>
-                        <p>Distribución y logística de alta costura urbana. El inventario de drops exclusivos y pasarelas de pago digitales se reanudará en la siguiente fase corporativa.</p>
+                    <div class="card-link-trigger" style="opacity: 0.4;">
+                        Acceso Restringido <i class="fa-solid fa-lock" style="font-size: 0.6rem;"></i>
                     </div>
                 </div>
-                <div class="card-link-trigger" style="opacity: 0.4;">
-                    Acceso Restringido <i class="fa-solid fa-lock" style="font-size: 0.6rem;"></i>
+
+                <div class="ecosystem-card card-restricted">
+                    <div class="card-top-wrapper">
+                        <div class="card-brand-meta">
+                            <div class="brand-avatar">
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+                            <div>
+                                <div class="brand-title">
+                                    <span class="censored-text">Store GH</span>
+                                </div>
+                                <div class="brand-subtitle">Premium Retail & Apparel</div>
+                            </div>
+                        </div>
+
+                        <div class="card-manifesto">
+                            <h3>Indumentaria Urbana de Lujo</h3>
+                            <p>Distribución y logística de alta costura urbana. El inventario de drops exclusivos y pasarelas de pago digitales se reanudará en la siguiente fase corporativa.</p>
+                        </div>
+                    </div>
+                    <div class="card-link-trigger" style="opacity: 0.4;">
+                        Acceso Restringido <i class="fa-solid fa-lock" style="font-size: 0.6rem;"></i>
+                    </div>
                 </div>
+
             </div>
 
         </div>
@@ -649,17 +612,16 @@
         // --- MOTOR DE PARTÍCULAS ULTRA EFICIENTE ---
         function createEnergyEngine() {
             const container = document.getElementById('particles-container');
-            const particleCount = 28; // Densidad ideal elegante y sin lag
+            const particleCount = 28;
 
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('energy-particle');
                 
-                // Configuración física aleatoria
-                const size = Math.random() * 3 + 1; // Entre 1px y 4px
-                const leftPos = Math.random() * 100; // Posición horizontal
-                const delay = Math.random() * 8; // Retraso de salida inicial
-                const duration = Math.random() * 6 + 5; // Velocidad de subida (5s a 11s)
+                const size = Math.random() * 3 + 1;
+                const leftPos = Math.random() * 100;
+                const delay = Math.random() * 8;
+                const duration = Math.random() * 6 + 5;
 
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
@@ -671,25 +633,6 @@
             }
         }
         createEnergyEngine();
-
-        // --- SISTEMA INTEGREGADO DE NAVEGACIÓN DE CARRUSEL (DOT TRACKER) ---
-        const track = document.getElementById('enterpriseTrack');
-        const dots = document.querySelectorAll('.indicator-dot');
-
-        track.addEventListener('scroll', () => {
-            const width = track.getBoundingClientRect().width;
-            const scrollLeft = track.scrollLeft;
-            // Calcular el índice del elemento activo basado en la posición
-            const activeIndex = Math.round(scrollLeft / (width * 0.85)); 
-
-            dots.forEach((dot, index) => {
-                if (index === activeIndex) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-        });
 
         // --- MOTOR DE SCROLL INTERACTIVO PARA EL HERO ---
         const heroPortal = document.getElementById('heroPortal');
