@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>5am Corporation | Private Matrix</title>
-    <!-- Fuentes de Élite Apple-Style: Inter y Plus Jakarta Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -36,6 +35,30 @@
             perspective: 1200px;
         }
 
+        /* --- MOTOR DE PARTÍCULAS DE ENERGÍA --- */
+        #particles-container {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .energy-particle {
+            position: absolute;
+            background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%);
+            border-radius: 50%;
+            bottom: -20px;
+            pointer-events: none;
+            animation: riseUp linear infinite;
+        }
+
+        @keyframes riseUp {
+            0% { transform: translateY(0) scale(0.5); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-105vh) scale(1.2); opacity: 0; }
+        }
+
         /* --- AMBIENTACIÓN PREMIUM CYBER-GRID --- */
         .ambient-matrix {
             position: fixed;
@@ -61,7 +84,7 @@
                 linear-gradient(90deg, rgba(255, 255, 255, 0.004) 1px, transparent 1px);
             background-size: 90px 90px;
             transform: rotateX(55deg) translateZ(-60px);
-            opacity: 0.6;
+            opacity: 0.4;
         }
 
         /* Marcadores perimetrales */
@@ -188,7 +211,7 @@
             letter-spacing: 0.25em;
         }
 
-        /* --- REJILLA Y ORIENTACIÓN CENTRADA TOTAL (APPLE ECOSYSTEM LOOK) --- */
+        /* --- REJILLA (APPLE ECOSYSTEM LOOK) --- */
         .ecosystem-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -199,29 +222,27 @@
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
             border-radius: 24px;
-            padding: 50px 28px;
+            padding: 50px 24px;
             display: flex;
             flex-direction: column;
             align-items: center; 
             text-align: center; 
-            justify-content: flex-start; /* Ajustado para dar espacio a listas de botones */
-            min-height: 580px;
+            justify-content: flex-start;
+            min-height: 620px;
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
-            transform-style: preserve-3d;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s, box-shadow 0.5s;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.6s, box-shadow 0.6s;
         }
 
         .ecosystem-card:hover {
-            transform: translate3d(0, -6px, 0);
+            transform: translate3d(0, -8px, 0);
             border-color: var(--border-active);
-            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.85);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255,255,255,0.1);
         }
 
-        /* Wrapper superior para mantener consistencia de centrado */
         .card-top-wrapper {
             display: flex;
             flex-direction: column;
@@ -229,7 +250,6 @@
             width: 100%;
         }
 
-        /* Cabecera Interna Centrada */
         .card-brand-meta {
             display: flex;
             flex-direction: column; 
@@ -239,16 +259,17 @@
         }
 
         .brand-avatar {
-            width: 52px;
-            height: 52px;
+            width: 56px;
+            height: 56px;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border-glass);
-            border-radius: 14px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.15rem;
+            font-size: 1.25rem;
             color: var(--text-secondary);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
             transition: var(--transition-fluid);
         }
 
@@ -256,11 +277,12 @@
             background: #ffffff;
             color: #000000;
             border-color: #ffffff;
+            box-shadow: 0 15px 30px rgba(255,255,255,0.2);
         }
 
         .brand-title {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 600;
             letter-spacing: -0.01em;
         }
@@ -274,61 +296,118 @@
             margin-top: 6px;
         }
 
-        /* --- BOTONES INTERNOS PREMIUM (ESTILO APPLE APP SUB-MENU) --- */
-        .card-action-menu {
+        /* --- ARQUITECTURA DEL CARRUSEL PREMIUM (SNEAK-PEEK LOOK) --- */
+        .carousel-viewport-wrapper {
+            position: relative;
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
-        .menu-btn {
+        /* Degradados laterales de desvanecimiento estilo Apple Store */
+        .carousel-viewport-wrapper::before,
+        .carousel-viewport-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; width: 25px;
+            z-index: 5;
+            pointer-events: none;
+            transition: var(--transition-fluid);
+        }
+        .carousel-viewport-wrapper::before {
+            left: -2px;
+            background: linear-gradient(90deg, #090a0d 0%, transparent 100%);
+        }
+        .carousel-viewport-wrapper::after {
+            right: -2px;
+            background: linear-gradient(-90deg, #090a0d 0%, transparent 100%);
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Ocultar barra Firefox */
+            padding: 15px 5px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none; /* Ocultar barra Chrome/Safari */
+        }
+
+        /* Contenedor Individual de la App dentro del Carrusel */
+        .menu-btn {
+            flex: 0 0 88%; /* Muestra casi toda la tarjeta y asoma la siguiente */
+            scroll-snap-align: center;
+            background: linear-gradient(145deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.03) 100%);
             border: 1px solid var(--border-glass);
-            border-radius: 16px; /* Bordes suaves estilo Apple Card Sub-elements */
-            padding: 16px;
+            border-radius: 20px;
+            padding: 24px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             text-decoration: none;
             color: var(--text-primary);
-            transition: var(--transition-fluid);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .menu-btn:hover {
             background: rgba(255, 255, 255, 0.05);
             border-color: rgba(255, 255, 255, 0.2);
-            transform: scale(1.02);
+            transform: translateY(-4px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.6), 0 0 30px rgba(255,255,255,0.03);
         }
 
         .menu-btn-title {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
         .menu-btn-title i {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
             transition: var(--transition-fluid);
         }
 
         .menu-btn:hover .menu-btn-title i {
             color: #ffffff;
+            transform: translate(2px, -2px);
         }
 
         .menu-btn-desc {
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             color: var(--text-secondary);
-            line-height: 1.4;
-            max-width: 90%;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        /* Controles Visuales inferiores del Carrusel */
+        .carousel-nav-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 18px;
+        }
+
+        .indicator-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            transition: var(--transition-fluid);
+        }
+
+        .indicator-dot.active {
+            background: #ffffff;
+            width: 18px;
+            border-radius: 4px;
         }
 
         /* --- CENSURA ESTILO APPLE SCREEN --- */
@@ -351,10 +430,9 @@
             border-radius: 4px;
         }
 
-        /* Bloque de Contenido Centrado */
         .card-manifesto {
             width: 100%;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .card-manifesto h3 {
@@ -362,7 +440,7 @@
             font-size: 1.35rem;
             font-weight: 600;
             line-height: 1.35;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
             letter-spacing: -0.02em;
         }
 
@@ -370,10 +448,8 @@
             color: var(--text-secondary);
             font-size: 0.9rem;
             line-height: 1.65;
-            font-weight: 400;
         }
 
-        /* Botón de Acción Inferior Centrado */
         .card-link-trigger {
             font-size: 0.65rem;
             font-weight: 600;
@@ -384,17 +460,13 @@
             align-items: center;
             justify-content: center; 
             gap: 10px;
-            margin-top: auto; /* Empuja el aviso de restricción al fondo de la tarjeta */
+            margin-top: auto; 
             padding-top: 35px;
             width: 100%;
         }
 
-        .card-restricted {
-            cursor: not-allowed;
-        }
-        .card-restricted:hover {
-            border-color: rgba(255, 255, 255, 0.06);
-        }
+        .card-restricted { cursor: not-allowed; }
+        .card-restricted:hover { border-color: rgba(255, 255, 255, 0.06); }
 
         /* --- FOOTER CENTRADO --- */
         footer {
@@ -431,12 +503,14 @@
             .ecosystem-card { min-height: auto; padding: 45px 20px; border-radius: 24px; }
             .ecosystem-container { padding: 60px 20px; }
             .matrix-data-tag { display: none; } 
+            .menu-btn { flex: 0 0 85%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Tags Perimetrales Corporativos -->
+    <div id="particles-container"></div>
+
     <div class="matrix-data-tag tag-left">SYS.STATUS // OPERATIONAL SECURE</div>
     <div class="matrix-data-tag tag-right">CORE ARCHITECTURE v4.0.26</div>
 
@@ -445,7 +519,6 @@
         <div class="cyber-grid"></div>
     </div>
 
-    <!-- MAIN HERO -->
     <header class="hero-viewport" id="heroPortal">
         <div class="corp-badge">Corporate System</div>
         <h1>5am Corporation</h1>
@@ -456,7 +529,6 @@
         </a>
     </header>
 
-    <!-- ENTORNO COMPLETO DEL ECOSISTEMA -->
     <main class="ecosystem-container" id="holdings">
         <div class="ecosystem-header">
             <p>Holdings & Asset Management</p>
@@ -465,7 +537,6 @@
 
         <div class="ecosystem-grid">
             
-            <!-- DIVISION 1: 5AM ENTERPRISES (CON BOTONES INTEGRADOS PARA INSTAGRAM) -->
             <div class="ecosystem-card">
                 <div class="card-top-wrapper">
                     <div class="card-brand-meta">
@@ -474,38 +545,50 @@
                         </div>
                         <div>
                             <div class="brand-title">5am Enterprises</div>
-                            <div class="brand-subtitle">Media & Digital Infrastructure</div>
+                            <div class="brand-subtitle">Media & Asset Matrix</div>
                         </div>
                     </div>
 
                     <div class="card-manifesto">
-                        <h3>Nuestras Empresas</h3>
+                        <h3>Portafolio de Medios</h3>
                     </div>
 
-                    <!-- Menú de Botones Individuales con Redirección Eficiente -->
-                    <div class="card-action-menu">
-                        <!-- Botón Anuncios -->
-                        <a href="#" target="_blank" class="menu-btn">
-                            <div class="menu-btn-title">Anuncios <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-                            <div class="menu-btn-desc">Aquí hacemos publicidad a negocios digitales.</div>
-                        </a>
+                    <div class="carousel-viewport-wrapper">
+                        <div class="carousel-track" id="enterpriseTrack">
+                            
+                            <a href="#" target="_blank" class="menu-btn">
+                                <div class="menu-btn-title">Anuncios <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                                <div class="menu-btn-desc">Aquí hacemos publicidad a negocios digitales de alto alcance.</div>
+                            </a>
 
-                        <!-- Botón Seguidores -->
-                        <a href="#" target="_blank" class="menu-btn">
-                            <div class="menu-btn-title">Seguidores <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-                            <div class="menu-btn-desc">Aquí hacemos venta de seguidores para cualquier red social.</div>
-                        </a>
+                            <a href="#" target="_blank" class="menu-btn">
+                                <div class="menu-btn-title">Seguidores <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                                <div class="menu-btn-desc">Aquí hacemos venta de seguidores certificados para cualquier red social.</div>
+                            </a>
 
-                        <!-- Botón Páginas Web -->
-                        <a href="#" target="_blank" class="menu-btn">
-                            <div class="menu-btn-title">Páginas Web <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-                            <div class="menu-btn-desc">Aquí hacemos páginas web para negocios que vendan por Instagram o WhatsApp.</div>
-                        </a>
+                            <a href="#" target="_blank" class="menu-btn">
+                                <div class="menu-btn-title">Páginas Web <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                                <div class="menu-btn-desc">Aquí hacemos páginas web premium para negocios que vendan por Instagram o WhatsApp.</div>
+                            </a>
+
+                            <a href="#" target="_blank" class="menu-btn">
+                                <div class="menu-btn-title">Motivacional <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                                <div class="menu-btn-desc">Páginas de TikTok e Instagram donde se comparte contenido audiovisual de alto nivel.</div>
+                            </a>
+
+                        </div>
                     </div>
+
+                    <div class="carousel-nav-indicators">
+                        <div class="indicator-dot active"></div>
+                        <div class="indicator-dot"></div>
+                        <div class="indicator-dot"></div>
+                        <div class="indicator-dot"></div>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- DIVISION 2: 5AM TECH (CENSURADO / PROXIMAMENTE) -->
             <div class="ecosystem-card card-restricted">
                 <div class="card-top-wrapper">
                     <div class="card-brand-meta">
@@ -530,7 +613,6 @@
                 </div>
             </div>
 
-            <!-- DIVISION 3: STORE GH (CENSURADO / PROXIMAMENTE) -->
             <div class="ecosystem-card card-restricted">
                 <div class="card-top-wrapper">
                     <div class="card-brand-meta">
@@ -564,7 +646,52 @@
     </footer>
 
     <script>
-        // MOTOR DE SCROLL COMPACTO PARA SMARTPHONES
+        // --- MOTOR DE PARTÍCULAS ULTRA EFICIENTE ---
+        function createEnergyEngine() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 28; // Densidad ideal elegante y sin lag
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('energy-particle');
+                
+                // Configuración física aleatoria
+                const size = Math.random() * 3 + 1; // Entre 1px y 4px
+                const leftPos = Math.random() * 100; // Posición horizontal
+                const delay = Math.random() * 8; // Retraso de salida inicial
+                const duration = Math.random() * 6 + 5; // Velocidad de subida (5s a 11s)
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${leftPos}vw`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+
+                container.appendChild(particle);
+            }
+        }
+        createEnergyEngine();
+
+        // --- SISTEMA INTEGREGADO DE NAVEGACIÓN DE CARRUSEL (DOT TRACKER) ---
+        const track = document.getElementById('enterpriseTrack');
+        const dots = document.querySelectorAll('.indicator-dot');
+
+        track.addEventListener('scroll', () => {
+            const width = track.getBoundingClientRect().width;
+            const scrollLeft = track.scrollLeft;
+            // Calcular el índice del elemento activo basado en la posición
+            const activeIndex = Math.round(scrollLeft / (width * 0.85)); 
+
+            dots.forEach((dot, index) => {
+                if (index === activeIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        });
+
+        // --- MOTOR DE SCROLL INTERACTIVO PARA EL HERO ---
         const heroPortal = document.getElementById('heroPortal');
         let ticking = false;
 
