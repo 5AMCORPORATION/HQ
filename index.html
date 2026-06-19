@@ -293,10 +293,10 @@
             font-weight: 400;
         }
 
-        /* --- REJILLA PARA TARJETAS GRANDES --- */
+        /* --- REJILLA PARA TARJETAS GRANDES CONFIGURADA EN FILAS INDIVIDUALES --- */
         .standard-ecosystem-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr; /* Cambiado a una sola columna para verlas separadas de 1 en 1 */
             gap: 40px;
         }
 
@@ -461,14 +461,14 @@
             text-transform: uppercase;
         }
 
-        /* --- DISPOSITIVOS MÓVILES (FILAS DE DOS VISIBLES) --- */
+        /* --- DISPOSITIVOS MÓVILES --- */
         @media (max-width: 1024px) {
             .enterprise-compact-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 16px;
             }
             .standard-ecosystem-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr;
                 gap: 16px;
             }
         }
@@ -505,7 +505,8 @@
         
         /* Ajuste extremo para pantallas muy pequeñas */
         @media (max-width: 380px) {
-            .enterprise-compact-grid, .standard-ecosystem-grid { gap: 10px; }
+            .enterprise-compact-grid { gap: 10px; }
+            .standard-ecosystem-grid { gap: 10px; }
             .compact-card, .ecosystem-card { padding: 16px 12px; }
         }
     </style>
