@@ -199,6 +199,563 @@
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
             border-radius: 24px;
+            padding: 50px 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            text-align: center; 
+            justify-content: flex-start; /* Ajustado para dar espacio a listas de botones */
+            min-height: 580px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
+            transform-style: preserve-3d;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s, box-shadow 0.5s;
+        }
+
+        .ecosystem-card:hover {
+            transform: translate3d(0, -6px, 0);
+            border-color: var(--border-active);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.85);
+        }
+
+        /* Wrapper superior para mantener consistencia de centrado */
+        .card-top-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Cabecera Interna Centrada */
+        .card-brand-meta {
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .brand-avatar {
+            width: 52px;
+            height: 52px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            transition: var(--transition-fluid);
+        }
+
+        .ecosystem-card:hover .brand-avatar {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+        }
+
+        .brand-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .brand-subtitle {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-top: 6px;
+        }
+
+        /* --- BOTONES INTERNOS PREMIUM (ESTILO APPLE APP SUB-MENU) --- */
+        .card-action-menu {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .menu-btn {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px; /* Bordes suaves estilo Apple Card Sub-elements */
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: var(--transition-fluid);
+        }
+
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+        }
+
+        .menu-btn-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .menu-btn-title i {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            transition: var(--transition-fluid);
+        }
+
+        .menu-btn:hover .menu-btn-title i {
+            color: #ffffff;
+        }
+
+        .menu-btn-desc {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            max-width: 90%;
+        }
+
+        /* --- CENSURA ESTILO APPLE SCREEN --- */
+        .censored-text {
+            position: relative;
+            display: inline-block;
+            background-color: var(--censored-color);
+            color: transparent !important;
+            user-select: none;
+            cursor: not-allowed;
+            padding: 0 6px;
+            border-radius: 4px;
+        }
+        
+        .censored-text::after {
+            content: "";
+            position: absolute;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: #121216;
+            border-radius: 4px;
+        }
+
+        /* Bloque de Contenido Centrado */
+        .card-manifesto {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .card-manifesto h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            line-height: 1.35;
+            margin-bottom: 14px;
+            letter-spacing: -0.02em;
+        }
+
+        .card-manifesto p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.65;
+            font-weight: 400;
+        }
+
+        /* Botón de Acción Inferior Centrado */
+        .card-link-trigger {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            gap: 10px;
+            margin-top: auto; /* Empuja el aviso de restricción al fondo de la tarjeta */
+            padding-top: 35px;
+            width: 100%;
+        }
+
+        .card-restricted {
+            cursor: not-allowed;
+        }
+        .card-restricted:hover {
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+
+        /* --- FOOTER CENTRADO --- */
+        footer {
+            padding: 100px 24px;
+            border-top: 1px solid var(--border-glass);
+            text-align: center;
+            position: relative;
+            z-index: 3;
+            background: var(--bg-pure);
+        }
+
+        .footer-brand {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            margin-bottom: 20px;
+        }
+
+        footer p {
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.12);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* --- MEDIA QUERIES --- */
+        @media (max-width: 1200px) {
+            .ecosystem-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        }
+
+        @media (max-width: 840px) {
+            .ecosystem-grid { grid-template-columns: 1fr; gap: 30px; }
+            .ecosystem-card { min-height: auto; padding: 45px 20px; border-radius: 24px; }
+            .ecosystem-container { padding: 60px 20px; }
+            .matrix-data-tag { display: none; } 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tags Perimetrales Corporativos -->
+    <div class="matrix-data-tag tag-left">SYS.STATUS // OPERATIONAL SECURE</div>
+    <div class="matrix-data-tag tag-right">CORE ARCHITECTURE v4.0.26</div>
+
+    <div class="ambient-matrix">
+        <div class="glow-top"></div>
+        <div class="cyber-grid"></div>
+    </div>
+
+    <!-- MAIN HERO -->
+    <header class="hero-viewport" id="heroPortal">
+        <div class="corp-badge">Corporate System</div>
+        <h1>5am Corporation</h1>
+        <p>Un ecosistema global de infraestructura tecnológica, retail selecto y medios digitales de alto impacto.</p>
+        <a href="#holdings" class="action-scroll">
+            Sistemas Seguros
+            <i class="fa-solid fa-chevron-down"></i>
+        </a>
+    </header>
+
+    <!-- ENTORNO COMPLETO DEL ECOSISTEMA -->
+    <main class="ecosystem-container" id="holdings">
+        <div class="ecosystem-header">
+            <p>Holdings & Asset Management</p>
+            <h2>Nuestras Divisiones</h2>
+        </div>
+
+        <div class="ecosystem-grid">
+            
+            <!-- DIVISION 1: 5AM ENTERPRISES (CON BOTONES INTEGRADOS PARA INSTAGRAM) -->
+            <div class="ecosystem-card">
+                <div class="card-top-wrapper">
+                    <div class="card-brand-meta">
+                        <div class="brand-avatar">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <div>
+                            <div class="brand-title">5am Enterprises</div>
+                            <div class="brand-subtitle">Media & Digital Infrastructure</div>
+                        </div>
+                    </div>
+
+                    <div class="card-manifesto">
+                        <h3>Nuestras Empresas</h3>
+                    </div>
+
+                    <!-- Menú de Botones Individuales con Redirección Eficiente -->
+                    <div class="card-action-menu">
+                        <!-- Botón Anuncios -->
+                        <a href="#" target="_blank" class="menu-btn">
+                            <div class="menu-btn-title">Anuncios <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                            <div class="menu-btn-desc">Aquí hacemos publicidad a negocios digitales.</div>
+                        </a>
+
+                        <!-- Botón Seguidores -->
+                        <a href="#" target="_blank" class="menu-btn">
+                            <div class="menu-btn-title">Seguidores <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                            <div class="menu-btn-desc">Aquí hacemos venta de seguidores para cualquier red social.</div>
+                        </a>
+
+                        <!-- Botón Páginas Web -->
+                        <a href="#" target="_blank" class="menu-btn">
+                            <div class="menu-btn-title">Páginas Web <i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                            <div class="menu-btn-desc">Aquí hacemos páginas web para negocios que vendan por Instagram o WhatsApp.</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIVISION 2: 5AM TECH (CENSURADO / PROXIMAMENTE) -->
+            <div class="ecosystem-card card-restricted">
+                <div class="card-top-wrapper">
+                    <div class="card-brand-meta">
+                        <div class="brand-avatar">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <div>
+                            <div class="brand-title">
+                                <span class="censored-text">5am Tech</span>
+                            </div>
+                            <div class="brand-subtitle">Software Engineering</div>
+                        </div>
+                    </div>
+
+                    <div class="card-manifesto">
+                        <h3>Ecosistema Móvil Propietario</h3>
+                        <p>Desarrollo estratégico de software cerrado y soluciones tecnológicas orientadas al alto rendimiento. El acceso público a la landing se encuentra suspendido de manera temporal.</p>
+                    </div>
+                </div>
+                <div class="card-link-trigger" style="opacity: 0.4;">
+                    Acceso Restringido <i class="fa-solid fa-lock" style="font-size: 0.6rem;"></i>
+                </div>
+            </div>
+
+            <!-- DIVISION 3: STORE GH (CENSURADO / PROXIMAMENTE) -->
+            <div class="ecosystem-card card-restricted">
+                <div class="card-top-wrapper">
+                    <div class="card-brand-meta">
+                        <div class="brand-avatar">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <div>
+                            <div class="brand-title">
+                                <span class="censored-text">Store GH</span>
+                            </div>
+                            <div class="brand-subtitle">Premium Retail & Apparel</div>
+                        </div>
+                    </div>
+
+                    <div class="card-manifesto">
+                        <h3>Indumentaria Urbana de Lujo</h3>
+                        <p>Distribución y logística de alta costura urbana. El inventario de drops exclusivos y pasarelas de pago digitales se reanudará en la siguiente fase corporativa.</p>
+                    </div>
+                </div>
+                <div class="card-link-trigger" style="opacity: 0.4;">
+                    Acceso Restringido <i class="fa-solid fa-lock" style="font-size: 0.6rem;"></i>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-brand">5AM CORPORATION</div>
+        <p>&copy; 2026 Private Equity & Core Holdings. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // MOTOR DE SCROLL COMPACTO PARA SMARTPHONES
+        const heroPortal = document.getElementById('heroPortal');
+        let ticking = false;
+
+        function updateHeroScroll() {
+            const currentScroll = window.scrollY;
+            const heroHeight = heroPortal.offsetHeight;
+
+            if (currentScroll <= heroHeight) {
+                const fadeFactor = 1 - (currentScroll / heroHeight);
+                const blurFactor = (currentScroll / heroHeight) * 16;
+                
+                heroPortal.style.opacity = fadeFactor.toFixed(2);
+                heroPortal.style.filter = `blur(${blurFactor.toFixed(1)}px)`;
+                heroPortal.style.transform = `translate3d(0, ${(currentScroll * -0.16).toFixed(1)}px, 0)`;
+            }
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateHeroScroll);
+                ticking = true;
+            }
+        }, { passive: true });
+    </script>
+</body>
+</html>        }
+
+        /* --- AMBIENTACIÓN PREMIUM CYBER-GRID --- */
+        .ambient-matrix {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glow-top {
+            position: absolute;
+            top: -25%; left: 50%; transform: translateX(-50%);
+            width: 85vw; height: 55vh;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 75%);
+            filter: blur(90px);
+        }
+
+        .cyber-grid {
+            position: absolute;
+            width: 200%; height: 200%;
+            top: -50%; left: -50%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.004) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.004) 1px, transparent 1px);
+            background-size: 90px 90px;
+            transform: rotateX(55deg) translateZ(-60px);
+            opacity: 0.6;
+        }
+
+        /* Marcadores perimetrales */
+        .matrix-data-tag {
+            position: fixed;
+            font-size: 0.55rem;
+            color: rgba(255,255,255,0.12);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            z-index: 10;
+            font-weight: 500;
+        }
+        .tag-left { top: 40px; left: 40px; transform: rotate(-90deg) translateX(-100%); transform-origin: top left; }
+        .tag-right { bottom: 40px; right: 40px; transform: rotate(90deg) translateX(100%); transform-origin: bottom right; }
+
+        /* --- HERO PORTADA CELESTIAL Y TOTALMENTE CENTRADA --- */
+        .hero-viewport {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 24px;
+            position: relative;
+            z-index: 2;
+            will-change: transform, opacity;
+            transform: translate3d(0,0,0);
+        }
+
+        .corp-badge {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            border: 1px solid var(--border-glass);
+            padding: 8px 20px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.01);
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: matrixReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+        }
+
+        .hero-viewport h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(2.4rem, 6.5vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            background: linear-gradient(180deg, #ffffff 40%, #6e6e73 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: matrixReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
+        }
+
+        .hero-viewport p {
+            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+            max-width: 580px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            line-height: 1.7;
+            margin-bottom: 50px;
+            letter-spacing: -0.01em;
+            opacity: 0;
+            animation: matrixReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
+        }
+
+        .action-scroll {
+            position: absolute;
+            bottom: 60px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            color: var(--text-secondary);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: var(--transition-fluid);
+            opacity: 0;
+            animation: matrixReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.1s;
+        }
+        .action-scroll i { display: block; margin-top: 12px; font-size: 0.75rem; animation: pulseArrow 2.5s infinite; }
+
+        @keyframes pulseArrow {
+            0%, 100% { transform: translateY(0); opacity: 0.2; }
+            50% { transform: translateY(5px); opacity: 0.8; }
+        }
+
+        @keyframes matrixReveal {
+            from { opacity: 0; transform: translate3d(0, 20px, 0); filter: blur(5px); }
+            to { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); }
+        }
+
+        /* --- SECCIÓN ECOSISTEMA --- */
+        .ecosystem-container {
+            padding: 120px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 3;
+        }
+
+        .ecosystem-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .ecosystem-header h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 15px;
+        }
+
+        .ecosystem-header p {
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+        }
+
+        /* --- REJILLA Y ORIENTACIÓN CENTRADA TOTAL (APPLE ECOSYSTEM LOOK) --- */
+        .ecosystem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .ecosystem-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
             padding: 50px 32px;
             display: flex;
             flex-direction: column;
