@@ -9,13 +9,13 @@
     
     <style>
         :root {
-            --bg-pure: #020203;
-            --bg-card: rgba(10, 10, 13, 0.55);
-            --border-glass: rgba(255, 255, 255, 0.04);
-            --border-active: rgba(255, 255, 255, 0.18);
-            --text-primary: #ffffff;
-            --text-secondary: #86868b;
-            --censored-color: #ffffff;
+            --bg-pure: #ffffff;
+            --bg-card: rgba(245, 245, 247, 0.65);
+            --border-glass: rgba(0, 106, 78, 0.08);
+            --border-active: rgba(0, 106, 78, 0.3);
+            --text-primary: #006A4E; /* Pantone 3288 C */
+            --text-secondary: #86868b; /* Apple Secondary Grey */
+            --censored-color: #006A4E;
             --transition-fluid: all 0.5s cubic-bezier(0.15, 1, 0.3, 1);
         }
 
@@ -35,7 +35,7 @@
             perspective: 1200px;
         }
 
-        /* --- MOTOR DE PARTÍCULAS DE ENERGÍA --- */
+        /* --- MOTOR DE PARTÍCULAS (AHORA NEGRAS) --- */
         #particles-container {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -45,7 +45,7 @@
 
         .energy-particle {
             position: absolute;
-            background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%);
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
             border-radius: 50%;
             bottom: -20px;
             pointer-events: none;
@@ -54,12 +54,12 @@
 
         @keyframes riseUp {
             0% { transform: translateY(0) scale(0.5); opacity: 0; }
-            10% { opacity: 0.7; }
-            90% { opacity: 0.4; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.3; }
             100% { transform: translateY(-105vh) scale(1.2); opacity: 0; }
         }
 
-        /* --- AMBIENTACIÓN PREMIUM CYBER-GRID Y EFECTOS APPLE --- */
+        /* --- AMBIENTACIÓN PREMIUM APPLE GLASS --- */
         .ambient-matrix {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -71,7 +71,7 @@
             position: absolute;
             top: -25%; left: 50%; transform: translateX(-50%);
             width: 85vw; height: 55vh;
-            background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 75%);
+            background: radial-gradient(circle, rgba(0,106,78,0.04) 0%, transparent 75%);
             filter: blur(90px);
         }
 
@@ -80,27 +80,27 @@
             width: 200%; height: 200%;
             top: -50%; left: -50%;
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.004) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.004) 1px, transparent 1px);
+                linear-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px);
             background-size: 90px 90px;
             transform: rotateX(55deg) translateZ(-60px);
-            opacity: 0.4;
+            opacity: 0.5;
         }
 
         /* Marcadores perimetrales */
         .matrix-data-tag {
             position: fixed;
             font-size: 0.55rem;
-            color: rgba(255,255,255,0.12);
+            color: rgba(0, 106, 78, 0.35);
             letter-spacing: 0.15em;
             text-transform: uppercase;
             z-index: 10;
-            font-weight: 500;
+            font-weight: 600;
         }
         .tag-left { top: 40px; left: 40px; transform: rotate(-90deg) translateX(-100%); transform-origin: top left; }
         .tag-right { bottom: 40px; right: 40px; transform: rotate(90deg) translateX(100%); transform-origin: bottom right; }
 
-        /* --- HERO PORTADA CELESTIAL --- */
+        /* --- HERO PORTADA --- */
         .hero-viewport {
             height: 100vh;
             display: flex;
@@ -119,12 +119,12 @@
             font-size: 0.65rem;
             font-weight: 600;
             letter-spacing: 0.3em;
-            color: var(--text-secondary);
+            color: var(--text-primary);
             text-transform: uppercase;
             border: 1px solid var(--border-glass);
             padding: 8px 20px;
             border-radius: 8px;
-            background: rgba(255, 255, 255, 0.01);
+            background: rgba(0, 106, 78, 0.03);
             margin-bottom: 30px;
             opacity: 0;
             animation: matrixReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
@@ -136,7 +136,7 @@
             font-weight: 700;
             letter-spacing: -0.03em;
             line-height: 1.1;
-            background: linear-gradient(180deg, #ffffff 40%, #6e6e73 100%);
+            background: linear-gradient(180deg, #006A4E 50%, #1d1d1f 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 25px;
@@ -162,7 +162,7 @@
             font-size: 0.65rem;
             font-weight: 600;
             letter-spacing: 0.2em;
-            color: var(--text-secondary);
+            color: var(--text-primary);
             text-decoration: none;
             text-transform: uppercase;
             transition: var(--transition-fluid);
@@ -172,8 +172,8 @@
         .action-scroll i { display: block; margin-top: 12px; font-size: 0.75rem; animation: pulseArrow 2.5s infinite; }
 
         @keyframes pulseArrow {
-            0%, 100% { transform: translateY(0); opacity: 0.2; }
-            50% { transform: translateY(5px); opacity: 0.8; }
+            0%, 100% { transform: translateY(0); opacity: 0.3; }
+            50% { transform: translateY(5px); opacity: 1; }
         }
 
         @keyframes matrixReveal {
@@ -201,6 +201,7 @@
             font-weight: 700;
             letter-spacing: -0.02em;
             margin-bottom: 15px;
+            color: var(--text-primary);
         }
 
         .ecosystem-header p {
@@ -211,14 +212,13 @@
             letter-spacing: 0.25em;
         }
 
-        /* --- CONTENEDOR MAESTRO DE BLOQUES VERTICALES --- */
+        /* --- CONTENEDOR MAESTRO --- */
         .divisions-wrapper {
             display: flex;
             flex-direction: column;
             gap: 60px;
         }
 
-        /* Bloque Unificado de Enterprises */
         .enterprise-block {
             width: 100%;
         }
@@ -238,9 +238,9 @@
             gap: 24px;
         }
 
-        /* Tarjeta Estilo Opción A (Efecto Glassmorphism Avanzado Apple) */
+        /* Tarjeta Estilo Apple Light Glass */
         .compact-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.005) 100%), var(--bg-card);
+            background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 100%), var(--bg-card);
             border: 1px solid var(--border-glass);
             border-radius: 18px;
             padding: 35px 30px;
@@ -250,17 +250,17 @@
             min-height: 220px;
             text-decoration: none;
             color: var(--text-primary);
-            backdrop-filter: blur(40px) saturate(180%);
-            -webkit-backdrop-filter: blur(40px) saturate(180%);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.05);
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), inset 0 1px 1px rgba(255,255,255,0.9);
             transition: var(--transition-fluid);
         }
 
         .compact-card:hover {
             transform: scale(1.02) translate3d(0, -4px, 0);
             border-color: var(--border-active);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255,255,255,0.1);
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%), var(--bg-card);
+            box-shadow: 0 20px 40px rgba(0, 106, 78, 0.08), inset 0 1px 1px rgba(255,255,255,1);
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.6) 100%), var(--bg-card);
         }
 
         .compact-card-title {
@@ -282,7 +282,7 @@
         }
 
         .compact-card:hover .compact-card-title i {
-            color: #ffffff;
+            color: var(--text-primary);
             transform: translate(3px, -3px);
         }
 
@@ -293,7 +293,7 @@
             font-weight: 400;
         }
 
-        /* --- REJILLA PARA TARJETAS GRANDES CONFIGURADA EN FILAS INDIVIDUALES --- */
+        /* --- REJILLA PARA TARJETAS GRANDES --- */
         .standard-ecosystem-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -301,7 +301,7 @@
         }
 
         .ecosystem-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.002) 100%), var(--bg-card);
+            background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 100%), var(--bg-card);
             border: 1px solid var(--border-glass);
             border-radius: 24px;
             padding: 50px 30px;
@@ -313,16 +313,16 @@
             min-height: 480px;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(40px) saturate(180%);
-            -webkit-backdrop-filter: blur(40px) saturate(180%);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255,255,255,0.04);
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04), inset 0 1px 1px rgba(255,255,255,0.9);
             transition: var(--transition-fluid);
         }
 
         .ecosystem-card:hover {
             transform: scale(1.01) translate3d(0, -6px, 0);
             border-color: var(--border-active);
-            box-shadow: 0 45px 90px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255,255,255,0.08);
+            box-shadow: 0 25px 50px rgba(0, 106, 78, 0.08), inset 0 1px 1px rgba(255,255,255,1);
         }
 
         .card-top-wrapper {
@@ -343,23 +343,23 @@
         .brand-avatar {
             width: 56px;
             height: 56px;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(0, 106, 78, 0.05);
             border: 1px solid var(--border-glass);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.25rem;
-            color: var(--text-secondary);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            color: var(--text-primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
             transition: var(--transition-fluid);
         }
 
         .ecosystem-card:hover .brand-avatar {
-            background: #ffffff;
-            color: #000000;
-            border-color: #ffffff;
-            box-shadow: 0 15px 30px rgba(255,255,255,0.25);
+            background: var(--text-primary);
+            color: #ffffff;
+            border-color: var(--text-primary);
+            box-shadow: 0 10px 20px rgba(0,106,78,0.2);
         }
 
         .brand-title {
@@ -367,6 +367,7 @@
             font-size: 1.25rem;
             font-weight: 600;
             letter-spacing: -0.01em;
+            color: var(--text-primary);
         }
 
         .brand-subtitle {
@@ -378,7 +379,7 @@
             margin-top: 6px;
         }
 
-        /* --- CENSURA ESTILO APPLE SCREEN --- */
+        /* --- CENSURA ESTILO APPLE SCREEN (LIGHT MODE) --- */
         .censored-text {
             position: relative;
             display: inline-block;
@@ -394,7 +395,7 @@
             content: "";
             position: absolute;
             left: 0; top: 0; width: 100%; height: 100%;
-            background-color: #121216;
+            background-color: rgba(0, 106, 78, 0.1);
             border-radius: 4px;
         }
 
@@ -410,6 +411,7 @@
             line-height: 1.35;
             margin-bottom: 10px;
             letter-spacing: -0.02em;
+            color: var(--text-primary);
         }
 
         .card-manifesto p {
@@ -434,9 +436,9 @@
         }
 
         .card-restricted { cursor: not-allowed; }
-        .card-restricted:hover { border-color: rgba(255, 255, 255, 0.06); }
+        .card-restricted:hover { border-color: rgba(0, 106, 78, 0.15); }
 
-        /* --- FOOTER CENTRADO --- */
+        /* --- FOOTER --- */
         footer {
             padding: 100px 24px;
             border-top: 1px solid var(--border-glass);
@@ -452,11 +454,12 @@
             font-weight: 600;
             letter-spacing: 0.3em;
             margin-bottom: 20px;
+            color: var(--text-primary);
         }
 
         footer p {
             font-size: 0.65rem;
-            color: rgba(255,255,255,0.12);
+            color: var(--text-secondary);
             letter-spacing: 0.15em;
             text-transform: uppercase;
         }
@@ -477,7 +480,6 @@
             .ecosystem-container { padding: 60px 16px; }
             .ecosystem-header { margin-bottom: 45px; }
             
-            /* Ajustes Finos de Tarjetas Compactas en Móvil */
             .compact-card { 
                 min-height: 180px; 
                 padding: 22px 18px; 
@@ -486,7 +488,6 @@
             .compact-card-title { font-size: 1rem; margin-bottom: 8px; }
             .compact-card-desc { font-size: 0.75rem; line-height: 1.4; }
 
-            /* Ajustes Finos de Tarjetas Grandes en Móvil */
             .ecosystem-card { 
                 min-height: 420px; 
                 padding: 30px 16px; 
@@ -503,7 +504,6 @@
             .divisions-wrapper { gap: 40px; }
         }
         
-        /* Ajuste extremo para pantallas muy pequeñas */
         @media (max-width: 380px) {
             .enterprise-compact-grid { gap: 10px; }
             .standard-ecosystem-grid { gap: 10px; }
@@ -606,7 +606,7 @@
                             <p>Desarrollo estratégico de software cerrado y soluciones tecnológicas orientadas al alto rendimiento. El acceso público a la landing se encuentra suspendido de manera temporal.</p>
                         </div>
                     </div>
-                    <div class="card-link-trigger" style="opacity: 0.4;">
+                    <div class="card-link-trigger" style="opacity: 0.6;">
                         Acceso Restringido <i class="fa-solid fa-lock" style="font-size: 0.6rem;"></i>
                     </div>
                 </div>
@@ -630,7 +630,7 @@
                             <p>Distribución y logística de alta costura urbana. El inventario de drops exclusivos y pasarelas de pago digitales se reanudará en la siguiente fase corporativa.</p>
                         </div>
                     </div>
-                    <div class="card-link-trigger" style="opacity: 0.4;">
+                    <div class="card-link-trigger" style="opacity: 0.6;">
                         Acceso Restringido <i class="fa-solid fa-lock" style="font-size: 0.6rem;"></i>
                     </div>
                 </div>
@@ -668,34 +668,3 @@
 
                 container.appendChild(particle);
             }
-        }
-        createEnergyEngine();
-
-        // --- MOTOR DE SCROLL INTERACTIVO PARA EL HERO ---
-        const heroPortal = document.getElementById('heroPortal');
-        let ticking = false;
-
-        function updateHeroScroll() {
-            const currentScroll = window.scrollY;
-            const heroHeight = heroPortal.offsetHeight;
-
-            if (currentScroll <= heroHeight) {
-                const fadeFactor = 1 - (currentScroll / heroHeight);
-                const blurFactor = (currentScroll / heroHeight) * 16;
-                
-                heroPortal.style.opacity = fadeFactor.toFixed(2);
-                heroPortal.style.filter = `blur(${blurFactor.toFixed(1)}px)`;
-                heroPortal.style.transform = `translate3d(0, ${(currentScroll * -0.16).toFixed(1)}px, 0)`;
-            }
-            ticking = false;
-        }
-
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(updateHeroScroll);
-                ticking = true;
-            }
-        }, { passive: true });
-    </script>
-</body>
-</html>
