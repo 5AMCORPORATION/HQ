@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>5am Corporation | Private Matrix</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
             --bg-pure: #ffffff;
             --bg-card: rgba(252, 252, 253, 0.85);
-            --border-glass: rgba(0, 0, 0, 0.06);
+            --border-glass: rgba(0, 0, 0, 0.07);
             --border-active: rgba(0, 106, 78, 0.35);
             --text-accent: #006A4E; /* Pantone 3288 C */
             --text-main: #1d1d1f;
@@ -21,8 +21,8 @@
             /* SOMBRAS ELEVADAS Y LUMINOSAS */
             --apple-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.03);
             --apple-shadow-hover: 0 20px 45px rgba(0, 106, 78, 0.12), 0 6px 16px rgba(0, 0, 0, 0.04);
-            --button-shadow: 0 8px 24px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
-            --button-shadow-hover: 0 14px 32px rgba(0, 106, 78, 0.32), 0 4px 12px rgba(0, 106, 78, 0.15);
+            --button-shadow: 0 8px 20px rgba(0, 106, 78, 0.25), 0 2px 6px rgba(0, 0, 0, 0.08);
+            --button-shadow-hover: 0 12px 28px rgba(0, 106, 78, 0.4), 0 4px 12px rgba(0, 106, 78, 0.2);
             
             --transition-clean: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -152,75 +152,80 @@
             animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
         }
 
-        /* BOTÓN DE COMUNIDAD CON LUZ Y SOMBRAS PROFUNDAS */
+        /* --- BOTÓN DE COMUNIDAD COMPACTO Y LLAMATIVO --- */
         .btn-community {
             position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            background: linear-gradient(180deg, #2c2c2e 0%, var(--text-main) 100%);
+            gap: 10px;
+            background: linear-gradient(135deg, #008462 0%, #006A4E 100%);
             color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.02em;
-            padding: 16px 32px;
-            border-radius: 14px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            padding: 11px 22px; /* TAMAÑO REDUCIDO */
+            border-radius: 50px; /* Bordes redondeados tipo píldora premium */
             text-decoration: none;
             box-shadow: var(--button-shadow);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             overflow: hidden;
             transition: var(--transition-clean);
             opacity: 0;
-            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
+            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s, pulseGlow 3s infinite;
         }
 
-        /* Reflejo de luz superior del botón */
+        /* Pulsación resplandeciente exterior */
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(0, 106, 78, 0.4), 0 6px 18px rgba(0, 106, 78, 0.25);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(0, 106, 78, 0), 0 10px 25px rgba(0, 106, 78, 0.4);
+            }
+        }
+
+        /* Sparkle / Destello de luz diagonal continuo */
         .btn-community::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            top: -50%;
+            left: -75%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            transform: rotate(25deg);
+            animation: shineSweep 4s infinite;
         }
 
-        /* Destello luminoso al pasar el cursor (Shine sweep) */
-        .btn-community::after {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: linear-gradient(60deg, transparent 30%, rgba(255, 255, 255, 0.15) 50%, transparent 70%);
-            transform: rotate(30deg) translateX(-100%);
-            transition: transform 0.8s ease;
-        }
-
-        .btn-community:hover::after {
-            transform: rotate(30deg) translateX(100%);
+        @keyframes shineSweep {
+            0% { left: -75%; }
+            30%, 100% { left: 125%; }
         }
 
         .btn-community i {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.75rem;
             transition: transform 0.3s ease;
         }
 
         .btn-community:hover {
-            background: linear-gradient(180deg, #008462 0%, var(--text-accent) 100%);
+            transform: translateY(-2px) scale(1.02);
+            background: linear-gradient(135deg, #009870 0%, #007a5a 100%);
             box-shadow: var(--button-shadow-hover);
-            transform: translateY(-3px);
-            border-color: rgba(255, 255, 255, 0.25);
         }
 
         .btn-community:hover i {
-            color: #ffffff;
             transform: translateX(4px);
         }
 
         .btn-community:active {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(0, 106, 78, 0.25);
+            transform: translateY(0) scale(0.98);
         }
 
         .action-scroll {
@@ -257,8 +262,8 @@
 
         /* --- SECCIÓN ECOSISTEMA --- */
         .ecosystem-container {
-            padding: 100px 24px;
-            max-width: 1400px;
+            padding: 80px 24px;
+            max-width: 900px;
             margin: 0 auto;
             position: relative;
             z-index: 3;
@@ -266,7 +271,7 @@
 
         .ecosystem-header {
             text-align: center;
-            margin-bottom: 70px;
+            margin-bottom: 60px;
         }
 
         .ecosystem-header p {
@@ -292,88 +297,110 @@
             gap: 60px;
         }
 
+        /* --- CABECERA ESTILO IMAGEN DE REFERENCIA --- */
         .block-title-meta {
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 30px;
-            padding-left: 10px;
+            margin-bottom: 28px;
         }
 
-        /* ESTRUCTURA COMPACTA DE CUADROS CON TOQUES DE LUZ */
+        .header-avatar {
+            width: 52px;
+            height: 52px;
+            background-color: #E8F5E9;
+            border: 1px solid rgba(0, 106, 78, 0.15);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-accent);
+            flex-shrink: 0;
+        }
+
+        .header-title-text h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #111827;
+            line-height: 1.1;
+        }
+
+        .header-title-text p {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: #6B7280;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        /* CUADRÍCULA 5AM ENTERPRISES (IGUAL A LA REFERENCIA) */
         .enterprise-compact-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+            gap: 20px;
         }
 
         .compact-card {
             position: relative;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 252, 0.85) 100%);
-            border: 1px solid var(--border-glass);
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
             border-radius: 20px;
-            padding: 35px 30px;
+            padding: 28px 24px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 220px;
+            min-height: 190px;
             text-decoration: none;
             color: var(--text-main);
-            backdrop-filter: blur(20px) saturate(190%);
-            -webkit-backdrop-filter: blur(20px) saturate(190%);
-            box-shadow: var(--apple-shadow);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
             transition: var(--transition-clean);
-            overflow: hidden;
-        }
-
-        /* Borde superior resplandeciente */
-        .compact-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
         }
 
         .compact-card:hover {
-            transform: translateY(-4px) scale(1.01);
-            border-color: var(--border-active);
-            box-shadow: var(--apple-shadow-hover);
-            background: #ffffff;
+            transform: translateY(-3px);
+            border-color: rgba(0, 106, 78, 0.3);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
         }
 
         .compact-card:active {
-            transform: scale(0.995);
+            transform: scale(0.98);
+        }
+
+        .compact-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 20px;
         }
 
         .compact-card-title {
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 1.25rem;
-            font-weight: 600;
+            font-weight: 700;
+            color: #111827;
             letter-spacing: -0.01em;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            margin-bottom: 12px;
-            color: var(--text-main);
         }
 
-        .compact-card-title i {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+        .compact-card-header i {
+            font-size: 0.95rem;
+            color: #8E8E93;
             transition: var(--transition-clean);
         }
 
-        .compact-card:hover .compact-card-title i {
+        .compact-card:hover .compact-card-header i {
             color: var(--text-accent);
-            transform: translate(3px, -3px);
+            transform: translate(2px, -2px);
         }
 
         .compact-card-desc {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
+            font-size: 0.88rem;
+            color: #6E6E73;
+            line-height: 1.5;
             font-weight: 400;
         }
 
@@ -381,7 +408,7 @@
         .standard-ecosystem-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 40px;
+            gap: 30px;
         }
 
         .ecosystem-card {
@@ -389,13 +416,13 @@
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 252, 0.85) 100%);
             border: 1px solid var(--border-glass);
             border-radius: 24px;
-            padding: 50px 30px;
+            padding: 40px 30px;
             display: flex;
             flex-direction: column;
             align-items: center; 
             text-align: center; 
             justify-content: flex-start;
-            min-height: 480px;
+            min-height: 380px;
             backdrop-filter: blur(20px) saturate(190%);
             -webkit-backdrop-filter: blur(20px) saturate(190%);
             box-shadow: var(--apple-shadow);
@@ -429,20 +456,20 @@
             display: flex;
             flex-direction: column; 
             align-items: center;
-            gap: 16px;
-            margin-bottom: 25px;
+            gap: 14px;
+            margin-bottom: 20px;
         }
 
         .brand-avatar {
-            width: 56px;
-            height: 56px;
+            width: 52px;
+            height: 52px;
             background: linear-gradient(180deg, rgba(0, 106, 78, 0.08) 0%, rgba(0, 106, 78, 0.02) 100%);
             border: 1px solid rgba(0, 106, 78, 0.12);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: var(--text-accent);
             box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8);
             transition: var(--transition-clean);
@@ -469,7 +496,7 @@
             letter-spacing: 0.15em;
             color: var(--text-secondary);
             font-weight: 600;
-            margin-top: 6px;
+            margin-top: 4px;
         }
 
         .censored-text {
@@ -498,7 +525,7 @@
 
         .card-manifesto h3 {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             font-weight: 600;
             line-height: 1.35;
             margin-bottom: 10px;
@@ -508,8 +535,8 @@
 
         .card-manifesto p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.65;
+            font-size: 0.88rem;
+            line-height: 1.6;
         }
 
         .card-link-trigger {
@@ -521,9 +548,9 @@
             display: flex;
             align-items: center;
             justify-content: center; 
-            gap: 10px;
+            gap: 8px;
             margin-top: auto; 
-            padding-top: 35px;
+            padding-top: 25px;
             width: 100%;
             opacity: 0.6;
         }
@@ -532,7 +559,7 @@
 
         /* FOOTER */
         footer {
-            padding: 100px 24px;
+            padding: 80px 24px;
             border-top: 1px solid var(--border-glass);
             text-align: center;
             position: relative;
@@ -545,7 +572,7 @@
             font-size: 1.1rem;
             font-weight: 600;
             letter-spacing: 0.3em;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             color: var(--text-main);
         }
 
@@ -557,32 +584,24 @@
         }
 
         /* OPTIMIZACIÓN MÓVIL */
-        @media (max-width: 768px) {
-            .ecosystem-container { padding: 60px 16px; }
-            .ecosystem-header { margin-bottom: 45px; }
-            
-            .compact-card { 
-                min-height: 180px; 
-                padding: 24px 20px; 
+        @media (max-width: 640px) {
+            .enterprise-compact-grid {
+                grid-template-columns: repeat(2, 1fr); /* Mantiene 2 columnas similar a la captura */
+                gap: 12px;
+            }
+            .compact-card {
+                padding: 20px 16px;
+                min-height: 170px;
                 border-radius: 16px;
             }
-            .compact-card-title { font-size: 1.05rem; margin-bottom: 8px; }
-            .compact-card-desc { font-size: 0.8rem; line-height: 1.4; }
-
-            .ecosystem-card { 
-                min-height: 420px; 
-                padding: 35px 20px; 
-                border-radius: 20px;
+            .compact-card-title {
+                font-size: 1.05rem;
             }
-            .matrix-data-tag { display: none; } 
-            .divisions-wrapper { gap: 40px; }
-        }
-
-        @media (max-width: 500px) {
-            .enterprise-compact-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
+            .compact-card-desc {
+                font-size: 0.78rem;
+                line-height: 1.4;
             }
+            .matrix-data-tag { display: none; }
         }
     </style>
 </head>
@@ -607,7 +626,7 @@
         <h1>5AM CORPORATION</h1>
         <p>Un ecosistema global de infraestructura tecnológica, retail selecto y medios digitales de alto impacto.</p>
         
-        <!-- BOTÓN DE COMUNIDAD CON SOMBRA ELEVADA -->
+        <!-- BOTÓN DE COMUNIDAD REDUCIDO Y LLAMATIVO -->
         <a href="https://www.instagram.com" target="_blank" class="btn-community">
             <span>Ingresar a la Comunidad</span>
             <i class="fa-solid fa-chevron-right"></i>
@@ -629,42 +648,48 @@
         <div class="divisions-wrapper">
             
             <section class="enterprise-block">
+                <!-- ENCABEZADO FORMATO IMAGEN DE REFERENCIA -->
                 <div class="block-title-meta">
-                    <div class="brand-avatar" style="width: 48px; height: 48px; border-radius: 12px;">
-                        <i class="fa-solid fa-layer-group" style="font-size: 1rem;"></i>
+                    <div class="header-avatar">
+                        <i class="fa-solid fa-layer-group"></i>
                     </div>
-                    <div>
-                        <div class="brand-title" style="font-size: 1.4rem;">5am Enterprises</div>
-                        <div class="brand-subtitle" style="margin-top: 2px;">Media & Asset Matrix // Portafolio de Medios</div>
+                    <div class="header-title-text">
+                        <h3>5am Enterprises</h3>
+                        <p>Media & Asset Matrix // Portafolio de Medios</p>
                     </div>
                 </div>
 
+                <!-- GRIDA DE TARJETAS 2X2 FORMATO IMAGEN DE REFERENCIA -->
                 <div class="enterprise-compact-grid">
                     
                     <a href="https://www.instagram.com/5am.the_ads/" target="_blank" class="compact-card">
-                        <div class="compact-card-title">
-                            Anuncios <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        <div class="compact-card-header">
+                            <span class="compact-card-title">Anuncios</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </div>
                         <div class="compact-card-desc">Aquí hacemos publicidad a negocios digitales de alto alcance.</div>
                     </a>
 
                     <a href="https://www.instagram.com/5am.followers_worldwide/" target="_blank" class="compact-card">
-                        <div class="compact-card-title">
-                            Seguidores <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        <div class="compact-card-header">
+                            <span class="compact-card-title">Seguidores</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </div>
                         <div class="compact-card-desc">Aquí hacemos venta de seguidores certificados para cualquier red social.</div>
                     </a>
 
                     <a href="https://www.instagram.com/5am.website/" target="_blank" class="compact-card">
-                        <div class="compact-card-title">
-                            Páginas Web <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        <div class="compact-card-header">
+                            <span class="compact-card-title">Páginas Web</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </div>
                         <div class="compact-card-desc">Aquí hacemos página web premium para negocios que vendan por Instagram o WhatsApp.</div>
                     </a>
 
                     <a href="https://www.tiktok.com/@5am.growth?_r=1&_t=ZS-97Lw2P6Xjhy" target="_blank" class="compact-card">
-                        <div class="compact-card-title">
-                            Motivacional <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        <div class="compact-card-header">
+                            <span class="compact-card-title">Motivacional</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </div>
                         <div class="compact-card-desc">Aca se comparte contenido audiovisual de alto nivel.</div>
                     </a>
@@ -755,10 +780,9 @@
 
             reset(initialSpawning = false) {
                 this.x = Math.random() * width;
-                // Si es el primer renderizado se distribuyen en toda la pantalla; luego reaparecen en el fondo
                 this.y = initialSpawning ? Math.random() * height : height + 10;
                 this.vx = (Math.random() - 0.5) * 0.2;
-                this.vy = -(Math.random() * 0.5 + 0.25); // Movimiento continuo hacia arriba
+                this.vy = -(Math.random() * 0.5 + 0.25);
                 this.radius = Math.random() * 1.5 + 0.5;
                 this.alpha = Math.random() * 0.45 + 0.15;
             }
@@ -767,7 +791,6 @@
                 this.x += this.vx;
                 this.y += this.vy;
 
-                // Reaparecer abajo cuando salen por arriba
                 if (this.y < -10 || this.x < -10 || this.x > width + 10) {
                     this.reset(false);
                 }
@@ -796,7 +819,6 @@
                 particles[i].update();
                 particles[i].draw();
 
-                // Conexión sutil de constelación entre partículas cercanas
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
