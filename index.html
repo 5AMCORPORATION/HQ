@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>5am Corporation | Private Matrix</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
             --bg-pure: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.85);
-            --border-glass: rgba(0, 0, 0, 0.08);
-            --border-active: rgba(0, 106, 78, 0.5);
+            --bg-card: rgba(252, 252, 253, 0.85);
+            --border-glass: rgba(0, 0, 0, 0.06);
+            --border-active: rgba(0, 106, 78, 0.35);
             --text-accent: #006A4E; /* Pantone 3288 C */
             --text-main: #1d1d1f;
-            --text-secondary: #86868b;
+            --text-secondary: #6e6e73;
             --censored-color: #006A4E;
-            --apple-shadow: 0 12px 32px rgba(0, 0, 0, 0.05), 0 2px 6px rgba(0, 0, 0, 0.03);
-            --apple-shadow-hover: 0 20px 40px rgba(0, 106, 78, 0.12), 0 8px 16px rgba(0, 0, 0, 0.06);
-            --transition-apple: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            --apple-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            --apple-shadow-hover: 0 18px 40px rgba(0, 0, 0, 0.07), 0 4px 12px rgba(0, 106, 78, 0.05);
+            --transition-clean: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -38,19 +38,16 @@
             overflow-x: hidden;
         }
 
-        /* --- CANVAS GALAXIA DE PARTÍCULAS --- */
+        /* --- FONDO GALAXIA DISCRETA --- */
         #galaxy-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.85;
+            opacity: 0.6;
         }
 
-        /* --- AMBIENTACIÓN APPLE --- */
         .ambient-matrix {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -61,145 +58,157 @@
         .glow-top {
             position: absolute;
             top: -20%; left: 50%; transform: translateX(-50%);
-            width: 90vw; height: 60vh;
-            background: radial-gradient(circle, rgba(0,106,78,0.06) 0%, transparent 70%);
-            pointer-events: none;
+            width: 85vw; height: 50vh;
+            background: radial-gradient(circle, rgba(0,106,78,0.03) 0%, transparent 70%);
         }
+
+        /* Marcadores perimetrales */
+        .matrix-data-tag {
+            position: fixed;
+            font-size: 0.55rem;
+            color: rgba(0, 0, 0, 0.25);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            z-index: 10;
+            font-weight: 600;
+        }
+        .tag-left { top: 40px; left: 40px; transform: rotate(-90deg) translateX(-100%); transform-origin: top left; }
+        .tag-right { bottom: 40px; right: 40px; transform: rotate(90deg) translateX(100%); transform-origin: bottom right; }
 
         /* --- HERO PORTADA --- */
         .hero-viewport {
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 40px 24px 60px;
+            padding: 24px;
             position: relative;
             z-index: 2;
         }
 
         .corp-badge {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
-            letter-spacing: 0.25em;
+            letter-spacing: 0.3em;
             color: var(--text-accent);
             text-transform: uppercase;
-            border: 1px solid rgba(0, 106, 78, 0.2);
-            padding: 8px 22px;
-            border-radius: 30px;
-            background: rgba(0, 106, 78, 0.04);
-            margin-bottom: 28px;
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 106, 78, 0.15);
+            padding: 8px 20px;
+            border-radius: 8px;
+            background: rgba(0, 106, 78, 0.02);
+            margin-bottom: 24px;
             opacity: 0;
-            animation: appleFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
         }
 
-        /* Título agrandado e imponente */
+        /* Título corporativo sobrio */
         .hero-viewport h1 {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: clamp(3rem, 9vw, 6rem);
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            line-height: 1.05;
-            background: linear-gradient(180deg, #1d1d1f 20%, #006A4E 100%);
+            font-size: clamp(2.4rem, 6.5vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            background: linear-gradient(180deg, var(--text-main) 30%, var(--text-accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
             opacity: 0;
-            animation: appleFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
+            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
         }
 
         .hero-viewport p {
-            font-size: clamp(1rem, 2.2vw, 1.25rem);
-            max-width: 620px;
+            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+            max-width: 580px;
             color: var(--text-secondary);
             font-weight: 400;
             line-height: 1.6;
-            margin-bottom: 36px;
+            margin-bottom: 30px;
             letter-spacing: -0.01em;
             opacity: 0;
-            animation: appleFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
+            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
         }
 
-        /* BOTÓN DE COMUNIDAD PREMIUM STYLE APPLE */
+        /* BOTÓN DE COMUNIDAD CORPORATIVO */
         .btn-community {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            background: var(--text-accent);
+            gap: 10px;
+            background: var(--text-main);
             color: #ffffff;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
-            padding: 16px 36px;
-            border-radius: 40px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            padding: 14px 28px;
+            border-radius: 12px;
             text-decoration: none;
-            box-shadow: 0 10px 25px rgba(0, 106, 78, 0.3);
-            transition: var(--transition-apple);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+            transition: var(--transition-clean);
             opacity: 0;
-            animation: appleFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
+            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s;
         }
 
         .btn-community i {
-            font-size: 1.1rem;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
             transition: transform 0.3s ease;
         }
 
         .btn-community:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 18px 35px rgba(0, 106, 78, 0.45);
-            background: #00543e;
+            background: var(--text-accent);
+            box-shadow: 0 8px 20px rgba(0, 106, 78, 0.25);
+            transform: translateY(-2px);
         }
 
         .btn-community:hover i {
-            transform: translateX(4px);
+            color: #ffffff;
+            transform: translateX(3px);
         }
 
         .btn-community:active {
-            transform: translateY(1px) scale(0.98);
-            box-shadow: 0 5px 15px rgba(0, 106, 78, 0.3);
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 106, 78, 0.2);
         }
 
         .action-scroll {
             position: absolute;
-            bottom: 30px;
+            bottom: 40px;
             font-size: 0.65rem;
             font-weight: 600;
             letter-spacing: 0.2em;
-            color: var(--text-secondary);
+            color: var(--text-main);
             text-decoration: none;
             text-transform: uppercase;
-            transition: var(--transition-apple);
+            transition: var(--transition-clean);
             opacity: 0;
-            animation: appleFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 1s;
+            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 1s;
         }
 
         .action-scroll i {
             display: block;
-            margin-top: 8px;
-            font-size: 0.8rem;
+            margin-top: 10px;
+            font-size: 0.75rem;
             color: var(--text-accent);
-            animation: bounceArrow 2s infinite;
+            animation: pulseArrow 2.5s infinite;
         }
 
-        @keyframes bounceArrow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(6px); }
+        @keyframes pulseArrow {
+            0%, 100% { transform: translateY(0); opacity: 0.4; }
+            50% { transform: translateY(4px); opacity: 1; }
         }
 
-        @keyframes appleFadeUp {
-            from { opacity: 0; transform: translateY(30px); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         /* --- SECCIÓN ECOSISTEMA --- */
         .ecosystem-container {
-            padding: 80px 24px 120px;
-            max-width: 1200px;
+            padding: 100px 24px;
+            max-width: 1400px;
             margin: 0 auto;
             position: relative;
             z-index: 3;
@@ -207,12 +216,12 @@
 
         .ecosystem-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 70px;
         }
 
         .ecosystem-header p {
             color: var(--text-accent);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.25em;
@@ -221,134 +230,164 @@
 
         .ecosystem-header h2 {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 700;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.02em;
             color: var(--text-main);
         }
 
         .divisions-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 50px;
+            gap: 60px;
         }
 
         .block-title-meta {
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 28px;
+            margin-bottom: 30px;
+            padding-left: 10px;
         }
 
-        /* GRID TARJETAS COMPACTAS */
+        /* ESTRUCTURA EXACTA 5AM ENTERPRISES (CUADROS) */
         .enterprise-compact-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
+            gap: 30px;
         }
 
         .compact-card {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
-            border-radius: 24px;
-            padding: 32px 28px;
+            border-radius: 20px;
+            padding: 35px 30px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 200px;
+            min-height: 220px;
             text-decoration: none;
             color: var(--text-main);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            backdrop-filter: blur(20px) saturate(190%);
+            -webkit-backdrop-filter: blur(20px) saturate(190%);
             box-shadow: var(--apple-shadow);
-            transition: var(--transition-apple);
+            transition: var(--transition-clean);
         }
 
         .compact-card:hover {
-            transform: translateY(-6px) scale(1.015);
+            transform: scale(1.015) translate3d(0, -4px, 0);
             border-color: var(--border-active);
             box-shadow: var(--apple-shadow-hover);
             background: #ffffff;
         }
 
         .compact-card:active {
-            transform: translateY(-1px) scale(0.99);
+            transform: scale(0.995);
         }
 
         .compact-card-title {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 100%;
             margin-bottom: 12px;
+            color: var(--text-main);
         }
 
         .compact-card-title i {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
-            transition: var(--transition-apple);
+            transition: var(--transition-clean);
         }
 
         .compact-card:hover .compact-card-title i {
             color: var(--text-accent);
-            transform: translate(4px, -4px);
+            transform: translate(3px, -3px);
         }
 
         .compact-card-desc {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
-            line-height: 1.5;
+            line-height: 1.6;
             font-weight: 400;
         }
 
-        /* TARJETAS RESTRINGIDAS */
+        /* TARJETAS GRANDES RESTRINGIDAS */
         .standard-ecosystem-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
+            grid-template-columns: 1fr;
+            gap: 40px;
         }
 
         .ecosystem-card {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
             border-radius: 24px;
-            padding: 40px 30px;
+            padding: 50px 30px;
             display: flex;
             flex-direction: column;
             align-items: center; 
             text-align: center; 
-            justify-content: space-between;
-            min-height: 360px;
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            justify-content: flex-start;
+            min-height: 480px;
+            position: relative;
+            backdrop-filter: blur(20px) saturate(190%);
+            -webkit-backdrop-filter: blur(20px) saturate(190%);
             box-shadow: var(--apple-shadow);
-            transition: var(--transition-apple);
+            transition: var(--transition-clean);
+        }
+
+        .ecosystem-card:hover {
+            transform: scale(1.01) translate3d(0, -4px, 0);
+            border-color: var(--border-active);
+            box-shadow: var(--apple-shadow-hover);
+            background: #ffffff;
+        }
+
+        .card-top-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .card-brand-meta {
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 25px;
         }
 
         .brand-avatar {
-            width: 60px;
-            height: 60px;
-            background: rgba(0, 106, 78, 0.06);
-            border: 1px solid rgba(0, 106, 78, 0.12);
-            border-radius: 18px;
+            width: 56px;
+            height: 56px;
+            background: rgba(0, 106, 78, 0.05);
+            border: 1px solid rgba(0, 106, 78, 0.1);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             color: var(--text-accent);
-            margin-bottom: 20px;
-            transition: var(--transition-apple);
+            transition: var(--transition-clean);
+        }
+
+        .ecosystem-card:hover .brand-avatar {
+            background: var(--text-accent);
+            color: #ffffff;
+            border-color: var(--text-accent);
         }
 
         .brand-title {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.35rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
             color: var(--text-main);
         }
 
@@ -358,7 +397,7 @@
             letter-spacing: 0.15em;
             color: var(--text-secondary);
             font-weight: 600;
-            margin-top: 4px;
+            margin-top: 6px;
         }
 
         .censored-text {
@@ -367,43 +406,61 @@
             background-color: var(--censored-color);
             color: transparent !important;
             user-select: none;
-            padding: 2px 8px;
-            border-radius: 6px;
+            cursor: not-allowed;
+            padding: 0 6px;
+            border-radius: 4px;
+        }
+        
+        .censored-text::after {
+            content: "";
+            position: absolute;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 106, 78, 0.08);
+            border-radius: 4px;
         }
 
         .card-manifesto {
-            margin: 20px 0;
+            width: 100%;
+            margin-bottom: 5px;
         }
 
         .card-manifesto h3 {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.35rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            line-height: 1.35;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
             color: var(--text-main);
         }
 
         .card-manifesto p {
             color: var(--text-secondary);
-            font-size: 0.88rem;
-            line-height: 1.6;
+            font-size: 0.9rem;
+            line-height: 1.65;
         }
 
         .card-link-trigger {
-            font-size: 0.7rem;
-            font-weight: 700;
+            font-size: 0.65rem;
+            font-weight: 600;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--text-secondary);
             display: flex;
             align-items: center;
-            gap: 8px;
-            opacity: 0.7;
+            justify-content: center; 
+            gap: 10px;
+            margin-top: auto; 
+            padding-top: 35px;
+            width: 100%;
+            opacity: 0.6;
         }
+
+        .card-restricted { cursor: not-allowed; }
 
         /* FOOTER */
         footer {
-            padding: 80px 24px;
+            padding: 100px 24px;
             border-top: 1px solid var(--border-glass);
             text-align: center;
             position: relative;
@@ -413,54 +470,57 @@
 
         .footer-brand {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 800;
-            letter-spacing: 0.25em;
-            margin-bottom: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            margin-bottom: 20px;
             color: var(--text-main);
         }
 
         footer p {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-secondary);
-            letter-spacing: 0.1em;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
         }
 
-        /* MOBILITY & RESPONSIVE DESIGN (OPTIMIZADO TELÉFONOS) */
-        @media (max-width: 850px) {
-            .enterprise-compact-grid,
-            .standard-ecosystem-grid {
+        /* MÓVIL OPTIMIZACIÓN */
+        @media (max-width: 768px) {
+            .ecosystem-container { padding: 60px 16px; }
+            .ecosystem-header { margin-bottom: 45px; }
+            
+            .compact-card { 
+                min-height: 180px; 
+                padding: 24px 20px; 
+                border-radius: 16px;
+            }
+            .compact-card-title { font-size: 1.05rem; margin-bottom: 8px; }
+            .compact-card-desc { font-size: 0.8rem; line-height: 1.4; }
+
+            .ecosystem-card { 
+                min-height: 420px; 
+                padding: 35px 20px; 
+                border-radius: 20px;
+            }
+            .matrix-data-tag { display: none; } 
+            .divisions-wrapper { gap: 40px; }
+        }
+
+        @media (max-width: 500px) {
+            .enterprise-compact-grid {
                 grid-template-columns: 1fr;
                 gap: 16px;
-            }
-
-            .hero-viewport {
-                padding-top: 80px;
-            }
-
-            .compact-card {
-                padding: 24px 22px;
-                min-height: auto;
-            }
-
-            .ecosystem-card {
-                padding: 32px 24px;
-                min-height: auto;
-            }
-
-            .btn-community {
-                width: 100%;
-                max-width: 320px;
-                padding: 18px 28px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- CANVAS ANIMACIÓN GALAXIA DE PARTÍCULAS -->
+    <!-- GALAXIA DE PARTÍCULAS SUBTIL Y ELEGANTE -->
     <canvas id="galaxy-canvas"></canvas>
+
+    <div class="matrix-data-tag tag-left">SYS.STATUS // OPERATIONAL SECURE</div>
+    <div class="matrix-data-tag tag-right">CORE ARCHITECTURE v4.0.26</div>
 
     <div class="ambient-matrix">
         <div class="glow-top"></div>
@@ -472,14 +532,14 @@
         <h1>5AM CORPORATION</h1>
         <p>Un ecosistema global de infraestructura tecnológica, retail selecto y medios digitales de alto impacto.</p>
         
-        <!-- BOTÓN INGRESO COMUNIDAD -->
+        <!-- BOTÓN DE COMUNIDAD -->
         <a href="https://www.instagram.com" target="_blank" class="btn-community">
-            <span>Unirse a la Comunidad</span>
-            <i class="fa-solid fa-arrow-right"></i>
+            <span>Ingresar a la Comunidad</span>
+            <i class="fa-solid fa-chevron-right"></i>
         </a>
 
         <a href="#holdings" class="action-scroll">
-            Explorar Divisiones
+            Sistemas Seguros
             <i class="fa-solid fa-chevron-down"></i>
         </a>
     </header>
@@ -495,12 +555,12 @@
             
             <section class="enterprise-block">
                 <div class="block-title-meta">
-                    <div class="brand-avatar" style="width: 50px; height: 50px; border-radius: 14px; margin-bottom: 0;">
-                        <i class="fa-solid fa-layer-group" style="font-size: 1.1rem;"></i>
+                    <div class="brand-avatar" style="width: 48px; height: 48px; border-radius: 12px;">
+                        <i class="fa-solid fa-layer-group" style="font-size: 1rem;"></i>
                     </div>
                     <div>
                         <div class="brand-title" style="font-size: 1.4rem;">5am Enterprises</div>
-                        <div class="brand-subtitle">Media & Asset Matrix // Portafolio de Medios</div>
+                        <div class="brand-subtitle" style="margin-top: 2px;">Media & Asset Matrix // Portafolio de Medios</div>
                     </div>
                 </div>
 
@@ -510,28 +570,28 @@
                         <div class="compact-card-title">
                             Anuncios <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </div>
-                        <div class="compact-card-desc">Publicidad estratégica y escalabilidad para negocios digitales de alto alcance.</div>
+                        <div class="compact-card-desc">Aquí hacemos publicidad a negocios digitales de alto alcance.</div>
                     </a>
 
                     <a href="https://www.instagram.com/5am.followers_worldwide/" target="_blank" class="compact-card">
                         <div class="compact-card-title">
                             Seguidores <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </div>
-                        <div class="compact-card-desc">Crecimiento orgánico y venta de seguidores certificados para redes sociales.</div>
+                        <div class="compact-card-desc">Aquí hacemos venta de seguidores certificados para cualquier red social.</div>
                     </a>
 
                     <a href="https://www.instagram.com/5am.website/" target="_blank" class="compact-card">
                         <div class="compact-card-title">
                             Páginas Web <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </div>
-                        <div class="compact-card-desc">Desarrollo web premium enfocado en conversión para ventas por Instagram y WhatsApp.</div>
+                        <div class="compact-card-desc">Aquí hacemos página web premium para negocios que vendan por Instagram o WhatsApp.</div>
                     </a>
 
                     <a href="https://www.tiktok.com/@5am.growth?_r=1&_t=ZS-97Lw2P6Xjhy" target="_blank" class="compact-card">
                         <div class="compact-card-title">
                             Motivacional <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </div>
-                        <div class="compact-card-desc">Producción y distribución de contenido audiovisual de alto valor e impacto.</div>
+                        <div class="compact-card-desc">Aca se comparte contenido audiovisual de alto nivel.</div>
                     </a>
 
                 </div>
@@ -539,43 +599,51 @@
 
             <div class="standard-ecosystem-grid">
                 
-                <div class="ecosystem-card">
-                    <div>
-                        <div class="brand-avatar">
-                            <i class="fa-solid fa-lock"></i>
+                <div class="ecosystem-card card-restricted">
+                    <div class="card-top-wrapper">
+                        <div class="card-brand-meta">
+                            <div class="brand-avatar">
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+                            <div>
+                                <div class="brand-title">
+                                    <span class="censored-text">5am Tech</span>
+                                </div>
+                                <div class="brand-subtitle">Software Engineering</div>
+                            </div>
                         </div>
-                        <div class="brand-title">
-                            <span class="censored-text">5am Tech</span>
-                        </div>
-                        <div class="brand-subtitle">Software Engineering</div>
 
                         <div class="card-manifesto">
                             <h3>Ecosistema Móvil Propietario</h3>
-                            <p>Desarrollo estratégico de software cerrado y soluciones tecnológicas orientadas al alto rendimiento. Acceso suspendido temporalmente.</p>
+                            <p>Desarrollo estratégico de software cerrado y soluciones tecnológicas orientadas al alto rendimiento. El acceso público a la landing se encuentra suspendido de manera temporal.</p>
                         </div>
                     </div>
                     <div class="card-link-trigger">
-                        Acceso Restringido <i class="fa-solid fa-lock" style="font-size: 0.65rem;"></i>
+                        Acceso Restringido <i class="fa-solid fa-lock" style="font-size: 0.6rem;"></i>
                     </div>
                 </div>
 
-                <div class="ecosystem-card">
-                    <div>
-                        <div class="brand-avatar">
-                            <i class="fa-solid fa-lock"></i>
+                <div class="ecosystem-card card-restricted">
+                    <div class="card-top-wrapper">
+                        <div class="card-brand-meta">
+                            <div class="brand-avatar">
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+                            <div>
+                                <div class="brand-title">
+                                    <span class="censored-text">Store GH</span>
+                                </div>
+                                <div class="brand-subtitle">Premium Retail & Apparel</div>
+                            </div>
                         </div>
-                        <div class="brand-title">
-                            <span class="censored-text">Store GH</span>
-                        </div>
-                        <div class="brand-subtitle">Premium Retail & Apparel</div>
 
                         <div class="card-manifesto">
                             <h3>Indumentaria Urbana de Lujo</h3>
-                            <p>Distribución y logística de alta costura urbana. Lanzamiento de drops exclusivos programado para la siguiente fase.</p>
+                            <p>Distribución y logística de alta costura urbana. El inventario de drops exclusivos y pasarelas de pago digitales se reanudará en la siguiente fase corporativa.</p>
                         </div>
                     </div>
                     <div class="card-link-trigger">
-                        Acceso Restringido <i class="fa-solid fa-lock" style="font-size: 0.65rem;"></i>
+                        Acceso Restringido <i class="fa-solid fa-lock" style="font-size: 0.6rem;"></i>
                     </div>
                 </div>
 
@@ -590,7 +658,7 @@
     </footer>
 
     <script>
-        /* --- ANIMACIÓN INTERACTIVA: GALAXIA DE PARTÍCULAS --- */
+        /* --- MOTOR SOBRIO DE GALAXIA DE PARTÍCULAS --- */
         const canvas = document.getElementById('galaxy-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -605,7 +673,7 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        class GalaxyParticle {
+        class Particle {
             constructor() {
                 this.reset();
             }
@@ -613,10 +681,10 @@
             reset() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.4;
-                this.vy = (Math.random() - 0.5) * 0.4;
-                this.radius = Math.random() * 1.8 + 0.5;
-                this.alpha = Math.random() * 0.5 + 0.2;
+                this.vx = (Math.random() - 0.5) * 0.25;
+                this.vy = (Math.random() - 0.5) * 0.25;
+                this.radius = Math.random() * 1.5 + 0.5;
+                this.alpha = Math.random() * 0.4 + 0.1;
             }
 
             update() {
@@ -638,16 +706,15 @@
 
         function initGalaxy() {
             particles = [];
-            const count = Math.floor((width * height) / 12000);
+            const count = Math.floor((width * height) / 18000);
             for (let i = 0; i < count; i++) {
-                particles.push(new GalaxyParticle());
+                particles.push(new Particle());
             }
         }
 
         function animateGalaxy() {
             ctx.clearRect(0, 0, width, height);
 
-            // Dibujar conexiones entre partículas cercanas
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
@@ -657,12 +724,12 @@
                     const dy = particles[i].y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
 
-                    if (dist < 100) {
+                    if (dist < 80) {
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(0, 106, 78, ${0.15 * (1 - dist / 100)})`;
-                        ctx.lineWidth = 0.6;
+                        ctx.strokeStyle = `rgba(0, 106, 78, ${0.08 * (1 - dist / 80)})`;
+                        ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
                 }
