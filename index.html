@@ -21,8 +21,8 @@
             /* SOMBRAS ELEVADAS Y LUMINOSAS */
             --apple-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.03);
             --apple-shadow-hover: 0 20px 45px rgba(0, 106, 78, 0.12), 0 6px 16px rgba(0, 0, 0, 0.04);
-            --button-shadow: 0 8px 20px rgba(0, 106, 78, 0.25), 0 2px 6px rgba(0, 0, 0, 0.08);
-            --button-shadow-hover: 0 12px 28px rgba(0, 106, 78, 0.4), 0 4px 12px rgba(0, 106, 78, 0.2);
+            --button-shadow: 0 8px 20px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
+            --button-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.15);
             
             --transition-clean: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -152,41 +152,41 @@
             animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
         }
 
-        /* --- BOTÓN DE COMUNIDAD COMPACTO Y LLAMATIVO --- */
+        /* --- BOTÓN DE COMUNIDAD EN TONO NEGRO/GRIS OSCURO --- */
         .btn-community {
             position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            background: linear-gradient(135deg, #008462 0%, #006A4E 100%);
+            background: linear-gradient(135deg, #2c2c2e 0%, #111827 100%);
             color: #ffffff;
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 0.03em;
-            padding: 11px 22px; /* TAMAÑO REDUCIDO */
-            border-radius: 50px; /* Bordes redondeados tipo píldora premium */
+            padding: 11px 22px;
+            border-radius: 50px;
             text-decoration: none;
             box-shadow: var(--button-shadow);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             overflow: hidden;
             transition: var(--transition-clean);
             opacity: 0;
-            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s, pulseGlow 3s infinite;
+            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s, pulseGlowDark 3s infinite;
         }
 
-        /* Pulsación resplandeciente exterior */
-        @keyframes pulseGlow {
+        /* Pulsación sutil en tonalidades oscuras */
+        @keyframes pulseGlowDark {
             0%, 100% {
-                box-shadow: 0 0 0 0 rgba(0, 106, 78, 0.4), 0 6px 18px rgba(0, 106, 78, 0.25);
+                box-shadow: 0 0 0 0 rgba(17, 24, 39, 0.3), 0 6px 18px rgba(0, 0, 0, 0.2);
             }
             50% {
-                box-shadow: 0 0 0 10px rgba(0, 106, 78, 0), 0 10px 25px rgba(0, 106, 78, 0.4);
+                box-shadow: 0 0 0 10px rgba(17, 24, 39, 0), 0 10px 25px rgba(0, 0, 0, 0.35);
             }
         }
 
-        /* Sparkle / Destello de luz diagonal continuo */
+        /* Destello diagonal resplandeciente */
         .btn-community::before {
             content: '';
             position: absolute;
@@ -197,7 +197,7 @@
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(255, 255, 255, 0.4),
+                rgba(255, 255, 255, 0.35),
                 transparent
             );
             transform: rotate(25deg);
@@ -216,7 +216,7 @@
 
         .btn-community:hover {
             transform: translateY(-2px) scale(1.02);
-            background: linear-gradient(135deg, #009870 0%, #007a5a 100%);
+            background: linear-gradient(135deg, #3a3a3c 0%, #000000 100%);
             box-shadow: var(--button-shadow-hover);
         }
 
@@ -337,7 +337,7 @@
             margin-top: 5px;
         }
 
-        /* CUADRÍCULA 5AM ENTERPRISES (IGUAL A LA REFERENCIA) */
+        /* CUADRÍCULA 5AM ENTERPRISES --- 2 COLUMNAS --- */
         .enterprise-compact-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -586,7 +586,7 @@
         /* OPTIMIZACIÓN MÓVIL */
         @media (max-width: 640px) {
             .enterprise-compact-grid {
-                grid-template-columns: repeat(2, 1fr); /* Mantiene 2 columnas similar a la captura */
+                grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
             }
             .compact-card {
@@ -626,7 +626,7 @@
         <h1>5AM CORPORATION</h1>
         <p>Un ecosistema global de infraestructura tecnológica, retail selecto y medios digitales de alto impacto.</p>
         
-        <!-- BOTÓN DE COMUNIDAD REDUCIDO Y LLAMATIVO -->
+        <!-- BOTÓN DE COMUNIDAD EN TONO NEGRO/GRIS OSCURO -->
         <a href="https://www.instagram.com" target="_blank" class="btn-community">
             <span>Ingresar a la Comunidad</span>
             <i class="fa-solid fa-chevron-right"></i>
@@ -642,13 +642,12 @@
     <main class="ecosystem-container" id="holdings">
         <div class="ecosystem-header">
             <p>Holdings & Asset Management</p>
-            <h2>Nuestras Divisiones</h2>
+            2. <h2>Nuestras Divisiones</h2>
         </div>
 
         <div class="divisions-wrapper">
             
             <section class="enterprise-block">
-                <!-- ENCABEZADO FORMATO IMAGEN DE REFERENCIA -->
                 <div class="block-title-meta">
                     <div class="header-avatar">
                         <i class="fa-solid fa-layer-group"></i>
@@ -659,7 +658,6 @@
                     </div>
                 </div>
 
-                <!-- GRIDA DE TARJETAS 2X2 FORMATO IMAGEN DE REFERENCIA -->
                 <div class="enterprise-compact-grid">
                     
                     <a href="https://www.instagram.com/5am.the_ads/" target="_blank" class="compact-card">
