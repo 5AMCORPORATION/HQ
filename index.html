@@ -43,7 +43,7 @@
             overflow-x: hidden;
         }
 
-        /* --- CANVA DE PARTÍCULAS ASCENDENTES --- */
+        /* --- CANVAS DE PARTÍCULAS ASCENDENTES --- */
         #galaxy-canvas {
             position: fixed;
             top: 0; left: 0;
@@ -80,31 +80,31 @@
         .tag-left { top: 40px; left: 40px; transform: rotate(-90deg) translateX(-100%); transform-origin: top left; }
         .tag-right { bottom: 40px; right: 40px; transform: rotate(90deg) translateX(100%); transform-origin: bottom right; }
 
-        /* --- HERO PORTADA --- */
+        /* --- HERO PORTADA COMPACTO --- */
         .hero-viewport {
-            height: 100vh;
+            min-height: 82vh;
+            padding: 60px 24px 40px 24px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 24px;
             position: relative;
             z-index: 2;
         }
 
         .corp-badge {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 700;
-            letter-spacing: 0.3em;
+            letter-spacing: 0.25em;
             color: var(--text-accent);
             text-transform: uppercase;
             border: 1px solid rgba(0, 106, 78, 0.2);
-            padding: 8px 22px;
+            padding: 6px 18px;
             border-radius: 30px;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(0, 106, 78, 0.03) 100%);
             box-shadow: 0 4px 15px rgba(0, 106, 78, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.8);
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -128,25 +128,25 @@
 
         .hero-viewport h1 {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: clamp(2.4rem, 6.5vw, 4.5rem);
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 700;
             letter-spacing: -0.03em;
             line-height: 1.1;
             background: linear-gradient(180deg, var(--text-main) 30%, var(--text-accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
             opacity: 0;
             animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
         }
 
         .hero-viewport p {
-            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
-            max-width: 580px;
+            font-size: clamp(0.85rem, 1.5vw, 0.98rem);
+            max-width: 520px;
             color: var(--text-secondary);
             font-weight: 400;
-            line-height: 1.6;
-            margin-bottom: 35px;
+            line-height: 1.5;
+            margin-bottom: 24px;
             letter-spacing: -0.01em;
             opacity: 0;
             animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
@@ -162,10 +162,10 @@
             background: linear-gradient(135deg, #2c2c2e 0%, #111827 100%);
             color: #ffffff;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 600;
             letter-spacing: 0.03em;
-            padding: 11px 22px;
+            padding: 10px 20px;
             border-radius: 50px;
             text-decoration: none;
             box-shadow: var(--button-shadow);
@@ -176,7 +176,6 @@
             animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.8s, pulseGlowDark 3s infinite;
         }
 
-        /* Pulsación sutil en tonalidades oscuras */
         @keyframes pulseGlowDark {
             0%, 100% {
                 box-shadow: 0 0 0 0 rgba(17, 24, 39, 0.3), 0 6px 18px rgba(0, 0, 0, 0.2);
@@ -186,7 +185,6 @@
             }
         }
 
-        /* Destello diagonal resplandeciente */
         .btn-community::before {
             content: '';
             position: absolute;
@@ -229,9 +227,8 @@
         }
 
         .action-scroll {
-            position: absolute;
-            bottom: 40px;
-            font-size: 0.65rem;
+            margin-top: 30px;
+            font-size: 0.6rem;
             font-weight: 600;
             letter-spacing: 0.2em;
             color: var(--text-main);
@@ -244,8 +241,8 @@
 
         .action-scroll i {
             display: block;
-            margin-top: 10px;
-            font-size: 0.75rem;
+            margin-top: 8px;
+            font-size: 0.7rem;
             color: var(--text-accent);
             animation: pulseArrow 2.5s infinite;
         }
@@ -262,7 +259,7 @@
 
         /* --- SECCIÓN ECOSISTEMA --- */
         .ecosystem-container {
-            padding: 80px 24px;
+            padding: 40px 24px 80px 24px;
             max-width: 900px;
             margin: 0 auto;
             position: relative;
@@ -271,7 +268,7 @@
 
         .ecosystem-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
         }
 
         .ecosystem-header p {
@@ -297,7 +294,7 @@
             gap: 60px;
         }
 
-        /* --- CABECERA ESTILO IMAGEN DE REFERENCIA --- */
+        /* --- CABECERA --- */
         .block-title-meta {
             display: flex;
             align-items: center;
@@ -585,6 +582,10 @@
 
         /* OPTIMIZACIÓN MÓVIL */
         @media (max-width: 640px) {
+            .hero-viewport {
+                min-height: auto;
+                padding: 50px 20px 30px 20px;
+            }
             .enterprise-compact-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
@@ -617,7 +618,7 @@
         <div class="glow-top"></div>
     </div>
 
-    <!-- HERO PRINCIPAL -->
+    <!-- HERO PRINCIPAL COMPACTO -->
     <header class="hero-viewport" id="heroPortal">
         <div class="corp-badge">
             <span class="live-indicator"></span>
@@ -642,7 +643,7 @@
     <main class="ecosystem-container" id="holdings">
         <div class="ecosystem-header">
             <p>Holdings & Asset Management</p>
-            2. <h2>Nuestras Divisiones</h2>
+            <h2>Nuestras Divisiones</h2>
         </div>
 
         <div class="divisions-wrapper">
@@ -766,30 +767,25 @@
         function resizeCanvas() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
+            initParticles();
         }
 
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
         class Particle {
-            constructor(initialSpawning = false) {
-                this.reset(initialSpawning);
+            constructor() {
+                this.reset(true);
             }
 
-            reset(initialSpawning = false) {
+            reset(initial = false) {
                 this.x = Math.random() * width;
-                this.y = initialSpawning ? Math.random() * height : height + 10;
-                this.vx = (Math.random() - 0.5) * 0.2;
-                this.vy = -(Math.random() * 0.5 + 0.25);
+                this.y = initial ? Math.random() * height : height + 10;
                 this.radius = Math.random() * 1.5 + 0.5;
-                this.alpha = Math.random() * 0.45 + 0.15;
+                this.speed = Math.random() * 0.4 + 0.1;
+                this.opacity = Math.random() * 0.5 + 0.1;
             }
 
             update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.y < -10 || this.x < -10 || this.x > width + 10) {
+                this.y -= this.speed;
+                if (this.y < -10) {
                     this.reset(false);
                 }
             }
@@ -797,46 +793,31 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(0, 106, 78, ${this.alpha})`;
+                ctx.fillStyle = `rgba(0, 106, 78, ${this.opacity})`;
                 ctx.fill();
             }
         }
 
-        function initGalaxy() {
+        function initParticles() {
             particles = [];
-            const count = Math.floor((width * height) / 16000);
+            const count = Math.floor((width * height) / 12000);
             for (let i = 0; i < count; i++) {
-                particles.push(new Particle(true));
+                particles.push(new Particle());
             }
         }
 
-        function animateGalaxy() {
+        function animate() {
             ctx.clearRect(0, 0, width, height);
-
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 75) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(0, 106, 78, ${0.07 * (1 - dist / 75)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animateGalaxy);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animate);
         }
 
-        initGalaxy();
-        animateGalaxy();
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        animate();
     </script>
 </body>
 </html>
